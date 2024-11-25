@@ -1,0 +1,29 @@
+.contRout {
+  display: flex;
+  background-color: #f7f7f7;
+  padding: 28px 0 28px 64px;
+}
+
+.logo {
+  /* padding: 28px 0; */
+  margin-right: 450px;
+  /* cursor: pointer; */
+}
+
+.contUl {
+  display: flex;
+  gap: 32px;
+}
+
+.contLi {
+  /* padding: 28px 0; */
+  /* cursor: pointer; */
+}
+
+.link {
+  color: #101828;
+}
+
+.active {
+  color: #d84343;
+}
