@@ -26,10 +26,10 @@ export const Catalog = () => {
       </div>
       <div>
         <p>Filters</p>
-        <h3>Vehicle equipment</h3>
+        <p>Vehicle equipment</p>
       </div>
       <div>
-        <h3>Vehicle type</h3>
+        <p>Vehicle type</p>
       </div>
       <CampersList />
     </section>

@@ -6,14 +6,17 @@ export const Camper = ({ data: { id, name, price, rating, location, description,
   return (
     <div className={css.contCamper}>
       <div className={css.backgroundImage} style={{ backgroundImage: `url(${firstImage})` }}></div>
-      <ul>
-        {/* <li>{id}</li> */}
-        <li>{name}</li>
-        <li>{price}</li>
-        <li>{rating}</li>
-        <li>{location}</li>
-        <li>{description}</li>
-      </ul>
+      <div className={css.contInfo}>
+        <div className={css.contNamePrice}>
+          <h3>{name}</h3>
+          <p>{price}</p>
+        </div>
+        <div className={css.contRevLoc}>
+          <p>{rating}</p>
+          <p>{location}</p>
+        </div>
+        <p>{description}</p>
+      </div>
     </div>
   );
 };

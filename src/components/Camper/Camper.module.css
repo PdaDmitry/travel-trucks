@@ -1,6 +1,12 @@
 .contCamper {
   display: flex;
   gap: 24px;
+  border: 1px solid #dadde1;
+  border-radius: 20px;
+  padding: 24px;
+  width: 888px;
+  height: 368px;
+  background: #fff;
   margin-bottom: 32px;
 }
 
