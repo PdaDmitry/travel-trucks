@@ -1,0 +1,14 @@
+.contCamper {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.backgroundImage {
+  border-radius: 10px;
+  min-width: 292px;
+  min-height: 320px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
