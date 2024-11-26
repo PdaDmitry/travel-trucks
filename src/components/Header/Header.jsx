@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import css from './Header.module.css';
 import clsx from 'clsx';
 
@@ -7,9 +7,19 @@ const buildLinkClass = ({ isActive }) => {
 };
 
 export const Header = () => {
+  const navigate = useNavigate();
+
+  const handleLogoClick = () => {
+    navigate('/');
+  };
+
   return (
     <header className={css.contRout}>
-      <div className={css.logo}>TravelTrucks</div>
+      <div className={css.logo} onClick={handleLogoClick}>
+        <svg className={css.logoSvg}>
+          <use href="/symbol-defs.svg#icon-Logo"></use>
+        </svg>
+      </div>
       <nav>
         <ul className={css.contUl}>
           <li className={css.contLi}>
