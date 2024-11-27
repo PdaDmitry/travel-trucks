@@ -6,38 +6,63 @@ import { CamperBookingForm } from '../../components/CamperBookingForm/CamperBook
 
 export const Details = () => {
   const { id } = useParams();
-  const camper = useSelector(selectCampersById(id));
+  // const camper = useSelector(selectCampersById(id));
+  const { name, description, price, rating, location, gallery, reviews } = useSelector(
+    selectCampersById(id)
+  );
 
-  if (!camper) {
+  if (!id) {
     return <p>Camper not found.</p>;
   }
 
   return (
-    <div>
-      <h1>{camper.name}</h1>
-      <p>{camper.description}</p>
-      <p>Price: {camper.price}</p>
-      <p>Rating: {camper.rating}</p>
-      <p>Location: {camper.location}</p>
-      <div>
-        {camper.gallery.map((image, index) => (
-          <img key={index} src={image.original} alt={`Camper image ${index + 1}`} />
+    <div className={css.contDetails}>
+      <h3 className={css.detailTitle}>{name}</h3>
+      <div className={css.ratingReviewsLocation}>
+        <p className={css.text}>
+          <svg className={css.ratingStar}>
+            <use href="/symbol-defs.svg#icon-Property-1Pressed"></use>
+          </svg>
+          {rating}({reviews.length} Reviews)
+        </p>
+        <p className={css.textLocation}>
+          <svg className={css.locationSvg}>
+            <use href="/symbol-defs.svg#icon-Map"></use>
+          </svg>
+          {location.split(', ').reverse().join(', ')}
+        </p>
+      </div>
+      <p className={css.price}>€{price}</p>
+      <div className={css.contImg}>
+        {gallery.map((image, index) => (
+          <div
+            key={index}
+            className={css.photoElements}
+            style={{
+              backgroundImage: `url(${image.original})`,
+            }}
+            aria-label={`Camper image ${index + 1}`} //alt
+          />
         ))}
       </div>
+      <p className={css.textDescr}>{description}</p>
       <ul className={css.contTextLink}>
-        <li>
+        <li className={css.navPage}>
           <NavLink to="features" className={css.featuresReviewsClass}>
-            <p>Features</p>
+            <p className={css.page}>Features</p>
           </NavLink>
         </li>
         <li>
           <NavLink to="reviews" className={css.featuresReviewsClass}>
-            <p>Reviews</p>
+            <p className={css.page}>Reviews</p>
           </NavLink>
         </li>
       </ul>
-      <Outlet />
-      <CamperBookingForm />
+      <p>Line</p>
+      <div className={css.contFeatRevForm}>
+        <Outlet />
+        <CamperBookingForm />
+      </div>
     </div>
   );
 };

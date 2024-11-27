@@ -1,0 +1,102 @@
+.contDetails {
+  padding: 48px 64px 80px;
+}
+
+.detailTitle {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  margin-bottom: 8px;
+}
+
+.ratingReviewsLocation {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.text {
+  display: flex;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  align-items: center;
+}
+
+.ratingStar {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.textLocation {
+  display: flex;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  align-items: center;
+  /* direction: rtl; */
+}
+
+.locationSvg {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  margin-bottom: 28px;
+}
+
+.contImg {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.photoElements {
+  width: 292px;
+  height: 312px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: inherit;
+  /* сжимает фото */
+  background-size: cover;
+  background-position: center;
+  /* object-fit: cover; */
+}
+
+.textDescr {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #475467;
+  margin-bottom: 60px;
+}
+
+.contTextLink {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 24px;
+}
+
+.navPage {
+}
+
+.page {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #101828;
+}
+
+.contFeatRevForm {
+  display: flex;
+}
