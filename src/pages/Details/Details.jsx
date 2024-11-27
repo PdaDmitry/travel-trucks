@@ -1,6 +1,8 @@
-import { useParams } from 'react-router-dom';
+import { NavLink, Outlet, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCampersById } from '../../redux/catalog/selectors';
+import css from './Details.module.css';
+import { CamperBookingForm } from '../../components/CamperBookingForm/CamperBookingForm';
 
 export const Details = () => {
   const { id } = useParams();
@@ -18,8 +20,24 @@ export const Details = () => {
       <p>Rating: {camper.rating}</p>
       <p>Location: {camper.location}</p>
       <div>
-        <img src={camper.gallery[0].original} alt={camper.name} />
+        {camper.gallery.map((image, index) => (
+          <img key={index} src={image.original} alt={`Camper image ${index + 1}`} />
+        ))}
       </div>
+      <ul className={css.contTextLink}>
+        <li>
+          <NavLink to="features" className={css.featuresReviewsClass}>
+            <p>Features</p>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="reviews" className={css.featuresReviewsClass}>
+            <p>Reviews</p>
+          </NavLink>
+        </li>
+      </ul>
+      <Outlet />
+      <CamperBookingForm />
     </div>
   );
 };

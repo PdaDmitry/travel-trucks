@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import css from './Camper.module.css';
 
 export const Camper = ({ data: { id, name, price, rating, location, description, gallery } }) => {
@@ -16,9 +17,11 @@ export const Camper = ({ data: { id, name, price, rating, location, description,
           <p>{location}</p>
         </div>
         <p>{description}</p>
-        <button type="button" className={css.camperBtn}>
-          Show more
-        </button>
+        <NavLink to={`/catalog/${id}`}>
+          <button type="button" className={css.camperBtn}>
+            Show more
+          </button>
+        </NavLink>
       </div>
     </div>
   );
