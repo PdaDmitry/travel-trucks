@@ -61,7 +61,7 @@ export const Details = () => {
       <p>Line</p>
       <div className={css.contFeatRevForm}>
         <Outlet />
-        <CamperBookingForm />
+        {/* <CamperBookingForm /> */}
       </div>
     </div>
   );

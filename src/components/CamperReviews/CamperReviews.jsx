@@ -1,3 +1,5 @@
+import { CamperBookingForm } from '../CamperBookingForm/CamperBookingForm';
+
 export const CamperReviews = () => {
-  return <h3>Reviews</h3>;
+  return <CamperBookingForm />;
 };
