@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import css from './Catalog.module.css';
 import { useEffect } from 'react';
 import { fetchCampersThunc } from '../../redux/catalog/operations';

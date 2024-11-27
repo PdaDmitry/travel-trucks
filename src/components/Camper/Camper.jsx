@@ -16,6 +16,9 @@ export const Camper = ({ data: { id, name, price, rating, location, description,
           <p>{location}</p>
         </div>
         <p>{description}</p>
+        <button type="button" className={css.camperBtn}>
+          Show more
+        </button>
       </div>
     </div>
   );
