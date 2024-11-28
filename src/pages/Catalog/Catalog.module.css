@@ -35,6 +35,17 @@
 
 .inputWrap {
   position: relative;
+  margin-bottom: 40px;
+}
+
+.mapSvg {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 18px;
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .inputLocat {
@@ -52,12 +63,83 @@
   color: #6c717b;
 }
 
-.mapSvg {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 18px;
-  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+.equipmentFilter {
+  margin-bottom: 32px;
+}
+
+.textFilter {
+  font-size: 16px;
+  color: #475467;
+  margin-bottom: 32px;
+}
+
+.titleEquipment {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.svgLineFilter {
+  display: block;
+  width: 360px;
+  height: 2px;
+  margin-bottom: 24px;
+}
+
+.equipmentList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+
+.equipmentItem {
+  width: calc((100% - 24px)/3);
+}
+
+.campersList {
+  margin-bottom: 40px;
+}
+
+.contSvgEquipment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #dadde1;
+  border-radius: 12px;
+  padding: 16px 40px;
+  width: 112px;
+  height: 96px;
+  mix-blend-mode: multiply;
+  text-align: center;
+}
+
+.svgEquipment {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+}
+
+.textEquipment {
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  padding-left: 0;
+}
+
+.btnLoadMore {
+  display: block;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  margin: 0 auto;
+  border: 1px solid #dadde1;
+  border-radius: 200px;
+  /* padding: 16px 32px; */
+  width: 145px;
+  height: 56px;
+}
+
+.btnLoadMore:hover {
+  border: 1px solid #d84343;
 }

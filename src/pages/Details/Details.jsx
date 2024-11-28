@@ -2,11 +2,10 @@ import { NavLink, Outlet, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCampersById } from '../../redux/catalog/selectors';
 import css from './Details.module.css';
-// import { CamperBookingForm } from '../../components/CamperBookingForm/CamperBookingForm';
 
 export const Details = () => {
   const { id } = useParams();
-  // const camper = useSelector(selectCampersById(id));
+
   const { name, description, price, rating, location, gallery, reviews } = useSelector(
     selectCampersById(id)
   );

@@ -1,0 +1,7 @@
+.contList li {
+    margin-bottom: 32px;
+}
+
+.contList li:last-child {
+    margin-bottom: 0;
+}

@@ -44,19 +44,70 @@ export const Catalog = () => {
               </svg>
             </div>
           </div>
-          <div>
-            <p>Filters</p>
-            <p>Vehicle equipment</p>
+          <div className={css.equipmentFilter}>
+            <p className={css.textFilter}>Filters</p>
+            <p className={css.titleEquipment}>Vehicle equipment</p>
+            <svg className={css.svgLineFilter}>
+              <use href="/symbol-line-filter.svg#icon-Divider-filter"></use>
+            </svg>
+            <ul className={css.equipmentList}>
+              <li className={css.equipmentItem}>
+                <div className={css.contSvgEquipment}>
+                  <svg className={css.svgEquipment}>
+                    <use href="/symbol-defs.svg#icon-Vector-10"></use>
+                  </svg>
+                  <p className={css.textEquipment}>AC</p>
+                </div>
+              </li>
+              <li className={css.equipmentItem}>
+                <div className={css.contSvgEquipment}>
+                  <svg className={css.svgEquipment}>
+                    <use href="/symbol-defs.svg#icon-Vector-12"></use>
+                  </svg>
+                  <p className={css.textEquipment}>Automatic</p>
+                </div>
+              </li>
+              <li className={css.equipmentItem}>
+                <div className={css.contSvgEquipment}>
+                  <svg className={css.svgEquipment}>
+                    <use href="/symbol-defs.svg#icon-Group-6"></use>
+                  </svg>
+                  <p className={css.textEquipment}>Kitchen</p>
+                </div>
+              </li>
+              <li className={css.equipmentItem}>
+                <div className={css.contSvgEquipment}>
+                  <svg className={css.svgEquipment}>
+                    <use href="/symbol-defs.svg#icon-Vector-7"></use>
+                  </svg>
+                  <p className={css.textEquipment}>TV</p>
+                </div>
+              </li>
+              <li className={css.equipmentItem}>
+                <div className={css.contSvgEquipment}>
+                  <svg className={css.svgEquipment}>
+                    <use href="/symbol-defs.svg#icon-Vector-8"></use>
+                  </svg>
+                  <p className={css.textEquipment}>Bathroom</p>
+                </div>
+              </li>
+            </ul>
           </div>
           <div>
-            <p>Vehicle type</p>
+            <p className={css.titleEquipment}>Vehicle type</p>
+            <svg className={css.svgLineFilter}>
+              <use href="/symbol-line-filter.svg#icon-Divider-filter"></use>
+            </svg>
           </div>
         </div>
 
         <div>
-          <CampersList page={page} />
+          <div className={css.campersList}>
+            <CampersList page={page} />
+          </div>
+
           {loadMore && (
-            <button type="button" onClick={handleLoadMore}>
+            <button className={css.btnLoadMore} type="button" onClick={handleLoadMore}>
               Load more
             </button>
           )}
