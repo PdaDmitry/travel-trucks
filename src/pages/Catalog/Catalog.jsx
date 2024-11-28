@@ -1,12 +1,17 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import css from './Catalog.module.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchCampersThunc } from '../../redux/catalog/operations';
-
 import { CampersList } from '../../components/СampersList/CampersList';
+// import { selectTotal } from '../../redux/catalog/selectors';
 
 export const Catalog = () => {
+  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
+
+  const handleLoadMore = () => {
+    setPage(page + 1);
+  };
 
   useEffect(() => {
     dispatch(fetchCampersThunc());
@@ -31,7 +36,12 @@ export const Catalog = () => {
       <div>
         <p>Vehicle type</p>
       </div>
-      <CampersList />
+      <div>
+        <CampersList page={page} />
+        <button type="button" onClick={handleLoadMore}>
+          Load more
+        </button>
+      </div>
     </section>
   );
 };

@@ -15,10 +15,24 @@ export const CamperReviews = () => {
           <use href="/symbol-line.svg#icon-Divider-right"></use>
         </svg>
       </div>
-      <div>
-        <div></div>
+      <div className={css.contInfo}>
+        <div className={css.contReview}>
+          {reviews.length > 0 ? (
+            <ul className={css.reviewList}>
+              {reviews.map((review, index) => (
+                <li key={index} className={css.reviewItem}>
+                  <h4>{review.reviewer_name}</h4>
+                  <p>Rating: {review.reviewer_rating}/5</p>
+                  <p>{review.comment}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No reviews available for this camper.</p>
+          )}
+        </div>
+        <CamperBookingForm />
       </div>
-      <CamperBookingForm />
     </div>
   );
 };

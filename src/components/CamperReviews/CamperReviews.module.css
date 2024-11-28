@@ -1,5 +1,33 @@
 .line {
-    width: 1312px;
-    height: 1vh;
-    margin-bottom: 44px;
+  width: 1312px;
+  height: 1vh;
+  margin-bottom: 44px;
+}
+
+.contInfo {
+  display: flex;
+  gap: 50px;
+}
+
+.contReview {
+  width: 631px;
+}
+
+.reviewList {
+}
+
+.reviewItem {
+  margin-bottom: 44px;
+}
+
+.reviewer_name {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.comment {
+  font-weight: 400;
+  font-size: 16px;
+  color: #475467;
 }

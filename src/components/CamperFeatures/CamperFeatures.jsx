@@ -55,7 +55,7 @@ export const CamperFeatures = () => {
           </ul>
           <p className={css.detailText}>Vehicle details</p>
           <div className={css.grayLine}></div>
-          <ui className={css.listParams}>
+          <ul className={css.listParams}>
             <li>
               <p>Form</p>
               <p>{camperForm}</p>
@@ -80,7 +80,7 @@ export const CamperFeatures = () => {
               <p>Consumption</p>
               <p>{consumption}</p>
             </li>
-          </ui>
+          </ul>
         </div>
         <CamperBookingForm />
       </div>

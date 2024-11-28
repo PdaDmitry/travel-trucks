@@ -6,6 +6,9 @@ const initialState = {
   isLoading: false,
   isError: false,
   selectedCamper: null,
+  perPage: 4,
+  total: 0,
+  maxPage: 1,
 };
 
 const catalogSlice = createSlice({
@@ -17,10 +20,13 @@ const catalogSlice = createSlice({
       .addCase(fetchCampersThunc.pending, (state, action) => {
         state.isLoading = true;
         state.isError = false;
+        state.total = 0;
       })
       .addCase(fetchCampersThunc.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = action.payload;
+        state.items = action.payload.items;
+        state.total = state.items.length;
+        state.maxPage = Math.ceil(state.total / state.perPage);
       })
       .addCase(fetchCampersThunc.rejected, (state, action) => {
         state.isLoading = false;
