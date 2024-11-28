@@ -1,0 +1,15 @@
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<symbol id="icon-Divider-right" viewBox="0 0 6997 32">
+<path fill="none" stroke="#dadde1" style="stroke: var(--color1, #dadde1)" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="5.3333" d="M0 16h6997.333"></path>
+<path fill="none" stroke="#e44848" style="stroke: var(--color2, #e44848)" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="26.6667" d="M666.667 16h426.667"></path>
+</symbol>
+<symbol id="icon-Vector-2" viewBox="0 0 453 32">
+<path fill="none" stroke="#e44848" style="stroke: var(--color2, #e44848)" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="26.6667" d="M0 16h453.333"></path>
+</symbol>
+<symbol id="icon-Divider" viewBox="0 0 6997 32">
+<path fill="none" stroke="#dadde1" style="stroke: var(--color1, #dadde1)" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="5.3333" d="M0 16h6997.333"></path>
+<path fill="none" stroke="#e44848" style="stroke: var(--color2, #e44848)" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="26.6667" d="M0 16h453.333"></path>
+</symbol>
+</defs>
+</svg>

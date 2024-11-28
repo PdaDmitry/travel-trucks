@@ -87,8 +87,7 @@
   margin-bottom: 24px;
 }
 
-.navPage {
-}
+.navPage {}
 
 .page {
   font-weight: 600;
@@ -97,6 +96,6 @@
   color: #101828;
 }
 
-.contFeatRevForm {
+/* .contFeatRevForm {
   display: flex;
-}
+} */

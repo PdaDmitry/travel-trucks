@@ -1,0 +1,76 @@
+.contFeatures {}
+
+.lineSvg {
+    width: 1312px;
+    height: 1vh;
+    margin-bottom: 44px;
+}
+
+.contInfo {
+    display: flex;
+    gap: 50px;
+}
+
+.contSvgParams {
+    width: 527px;
+    height: 104px;
+    margin-bottom: 100px;
+}
+
+.detailText {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.2;
+    margin-bottom: 24px;
+}
+
+.grayLine {
+    border-bottom: 1px solid #dadde1;
+    margin-bottom: 24px;
+}
+
+.contParams {
+    border-radius: 10px;
+    padding: 44px 52px;
+    width: 631px;
+    height: 588px;
+    background-color: #f7f7f7;
+    list-style-type: none;
+}
+
+.contSvgParams {
+    width: 527px;
+    height: 104px;
+}
+
+.svgParamsElem {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    border-radius: 100px;
+    padding: 12px 18px;
+    background-color: #f2f4f7;
+    mix-blend-mode: multiply;
+}
+
+.svg {
+    margin-right: 8px;
+}
+
+.contParams li {
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px; */
+}
+
+.listParams li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.listParams li:last-child {
+    margin-bottom: 0;
+}

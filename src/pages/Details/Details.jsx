@@ -2,7 +2,7 @@ import { NavLink, Outlet, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCampersById } from '../../redux/catalog/selectors';
 import css from './Details.module.css';
-import { CamperBookingForm } from '../../components/CamperBookingForm/CamperBookingForm';
+// import { CamperBookingForm } from '../../components/CamperBookingForm/CamperBookingForm';
 
 export const Details = () => {
   const { id } = useParams();
@@ -58,11 +58,7 @@ export const Details = () => {
           </NavLink>
         </li>
       </ul>
-      <p>Line</p>
-      <div className={css.contFeatRevForm}>
-        <Outlet />
-        {/* <CamperBookingForm /> */}
-      </div>
+      <Outlet />
     </div>
   );
 };
