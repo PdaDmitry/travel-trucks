@@ -8,28 +8,47 @@ import { selectMaxPage } from '../../redux/catalog/selectors';
 export const Catalog = () => {
   const [page, setPage] = useState(1);
   const [loadMore, setLoadMore] = useState(true);
-  const [location, setLocation] = useState({});
+  const [location, setLocation] = useState('');
+
+  const [AC, setAC] = useState(false);
+  const [transmission, setTransmission] = useState('');
+  const [kitchen, setKitchen] = useState(false);
+  const [TV, setTV] = useState(false);
+  const [bathroom, setBathroom] = useState(false);
+
+  const [form, setForm] = useState('');
 
   const maxPage = useSelector(selectMaxPage);
   const dispatch = useDispatch();
-  let query = {};
-  const handleLoadMore = () => {
-    if (page < maxPage) {
-      setPage(prevPage => prevPage + 1);
+
+  const handleInputChange = e => {
+    setLocation(e.target.value);
+  };
+
+  // const handleAcChange = () => {
+  //   setAC(true);
+  // };
+
+  // const handleAutomaticChange = () => {
+  //   setTransmission('automatic');
+  // };
+
+  const handleCheckboxChange = name => {
+    if (name === 'ac') {
+      setAC(true);
+    } else if (name === 'transmission') {
+      setTransmission('automatic');
+    } else if (name === 'kitchen') {
+      setKitchen(true);
+    } else if (name === 'TV') {
+      setTV(true);
+    } else if (name === 'bathroom') {
+      setBathroom(true);
     }
   };
 
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-
-    setLocation(prevLocation => ({
-      ...prevLocation,
-      [name]: value,
-    }));
-  };
-
-  const handleSearch = () => {
-    query.city = location.city;
+  const handleRadioChange = e => {
+    setForm(e.target.value);
   };
 
   useEffect(() => {
@@ -40,10 +59,34 @@ export const Catalog = () => {
     }
   }, [page, maxPage]);
 
-  useEffect(() => {
+  const handleLoadMore = () => {
+    if (page < maxPage) {
+      setPage(prevPage => prevPage + 1);
+    }
+  };
+
+  const handleSearch = () => {
+    const query = {
+      location,
+      AC,
+      transmission,
+      kitchen,
+      TV,
+      bathroom,
+      form,
+    };
+
+    // Dispatch action with query parameters
     dispatch(fetchCampersThunc(query));
-    setLocation({});
-  }, [dispatch, query]);
+    setLocation('');
+    setForm('');
+
+    console.log('query ', query);
+  };
+
+  useEffect(() => {
+    dispatch(fetchCampersThunc());
+  }, [dispatch]);
 
   return (
     <section className={css.contCatalog}>
@@ -75,7 +118,12 @@ export const Catalog = () => {
             <ul className={css.equipmentList}>
               <li className={css.equipmentItem}>
                 <label className={css.equipmentLabel}>
-                  <input type="checkbox" className={css.checkboxInput} />
+                  <input
+                    type="checkbox"
+                    className={css.checkboxInput}
+                    name="ac"
+                    onChange={() => handleCheckboxChange('ac')}
+                  />
                   <div className={css.contSvgEquipment}>
                     <svg className={css.svgEquipment}>
                       <use href="/symbol-defs.svg#icon-Vector-10"></use>
@@ -86,7 +134,12 @@ export const Catalog = () => {
               </li>
               <li className={css.equipmentItem}>
                 <label className={css.equipmentLabel}>
-                  <input type="checkbox" className={css.checkboxInput} />
+                  <input
+                    type="checkbox"
+                    className={css.checkboxInput}
+                    name="transmission"
+                    onChange={() => handleCheckboxChange('transmission')}
+                  />
                   <div className={css.contSvgEquipment}>
                     <svg className={css.svgEquipment}>
                       <use href="/symbol-defs.svg#icon-Vector-12"></use>
@@ -97,7 +150,12 @@ export const Catalog = () => {
               </li>
               <li className={css.equipmentItem}>
                 <label className={css.equipmentLabel}>
-                  <input type="checkbox" className={css.checkboxInput} />
+                  <input
+                    type="checkbox"
+                    className={css.checkboxInput}
+                    name="kitchen"
+                    onChange={() => handleCheckboxChange('kitchen')}
+                  />
                   <div className={css.contSvgEquipment}>
                     <svg className={css.svgEquipment}>
                       <use href="/symbol-defs.svg#icon-Group-6"></use>
@@ -108,7 +166,12 @@ export const Catalog = () => {
               </li>
               <li className={css.equipmentItem}>
                 <label className={css.equipmentLabel}>
-                  <input type="checkbox" className={css.checkboxInput} />
+                  <input
+                    type="checkbox"
+                    className={css.checkboxInput}
+                    name="TV"
+                    onChange={() => handleCheckboxChange('TV')}
+                  />
                   <div className={css.contSvgEquipment}>
                     <svg className={css.svgEquipment}>
                       <use href="/symbol-defs.svg#icon-Vector-7"></use>
@@ -119,7 +182,12 @@ export const Catalog = () => {
               </li>
               <li className={css.equipmentItem}>
                 <label className={css.equipmentLabel}>
-                  <input type="checkbox" className={css.checkboxInput} />
+                  <input
+                    type="checkbox"
+                    className={css.checkboxInput}
+                    name="bathroom"
+                    onChange={() => handleCheckboxChange('bathroom')}
+                  />
                   <div className={css.contSvgEquipment}>
                     <svg className={css.svgEquipment}>
                       <use href="/symbol-defs.svg#icon-Vector-8"></use>
@@ -145,8 +213,9 @@ export const Catalog = () => {
                   <input
                     type="radio"
                     className={css.checkboxInput}
-                    name="equipment"
-                    value="Alcove"
+                    name="vehicleType"
+                    value="panelTruck"
+                    onChange={handleRadioChange}
                   />
                   <div className={css.contSvgEquipment}>
                     <svg className={css.svgEquipment}>
@@ -161,10 +230,11 @@ export const Catalog = () => {
                   <input
                     type="radio"
                     className={css.checkboxInput}
-                    name="equipment"
-                    value="Alcove"
+                    name="vehicleType"
+                    value="fullyIntegrated"
+                    onChange={handleRadioChange}
                   />
-                  <div className={css.contSvgEquipment}>
+                  <div className={`${css.contSvgEquipment} ${css.fullyIntegrated}`}>
                     <svg className={css.svgEquipment}>
                       <use href="/symbol-defs.svg#icon-Vector-13"></use>
                     </svg>
@@ -177,8 +247,9 @@ export const Catalog = () => {
                   <input
                     type="radio"
                     className={css.checkboxInput}
-                    name="equipment"
-                    value="Alcove"
+                    name="vehicleType"
+                    value="alcove"
+                    onChange={handleRadioChange}
                   />
                   <div className={css.contSvgEquipment}>
                     <svg className={css.svgEquipment}>

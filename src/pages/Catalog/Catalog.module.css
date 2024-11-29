@@ -63,7 +63,6 @@
   color: #6c717b;
 }
 
-
 .equipmentFilter {
   margin-bottom: 32px;
 }
@@ -101,7 +100,7 @@
 }
 
 .equipmentItem {
-  width: calc((100% - 24px)/3);
+  width: calc((100% - 24px) / 3);
   /* !!!!!!!!!!!!!!!!! */
   /* list-style: none; */
 }
@@ -110,10 +109,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid transparent;
-  /* padding: 10px; */
-  /* Внутренний отступ */
-  cursor: pointer;
+  border: 1px solid transparent;
+
+  /* cursor: pointer; */
   transition: border-color 0.3s ease;
 }
 
@@ -121,11 +119,11 @@
   display: none;
 }
 
-.checkboxInput:checked+.contSvgEquipment {
-  border: 2px solid #e44848;
+.checkboxInput:checked + .contSvgEquipment {
+  border: 1px solid #e44848;
   /* Рамка контейнера становится красной */
 }
-
+/* type=van&location=city. */
 /* ================================================= */
 
 .searchBtn {
@@ -153,13 +151,14 @@
   flex-direction: column;
   align-items: center;
   border: 1px solid #dadde1;
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 16px 40px;
   width: 112px;
   height: 96px;
   mix-blend-mode: multiply;
   text-align: center;
-  /* !!!!!!!!!!!!!!!!!!! */
+  cursor: pointer;
+
   transition: border-color 0.3s ease;
 }
 
@@ -168,14 +167,17 @@
   width: 32px;
   height: 32px;
   margin-bottom: 8px;
-  /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-  /* fill: currentColor; */
+}
+
+.fullyIntegrated {
+  padding: 8px 32px;
 }
 
 .textEquipment {
   font-size: 16px;
+  line-height: 150%;
   letter-spacing: -0.01em;
-  padding-left: 0;
+  text-align: center;
 }
 
 .contTypeFilter {
