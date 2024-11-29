@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import css from './Catalog.module.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { fetchCampersThunc } from '../../redux/catalog/operations';
 import { CampersList } from '../../components/СampersList/CampersList';
-import { selectMaxPage } from '../../redux/catalog/selectors';
+import { selectMaxPage, selectTotal } from '../../redux/catalog/selectors';
 
 export const Catalog = () => {
   const [page, setPage] = useState(1);
@@ -19,19 +19,18 @@ export const Catalog = () => {
   const [form, setForm] = useState('');
 
   const maxPage = useSelector(selectMaxPage);
+  const total = useSelector(selectTotal);
+  console.log('Total ', total);
+  //We use the ref to clear the fields after the request
+  const locationRef = useRef(null);
+  const checkboxesRef = useRef([]);
+  const radioRefs = useRef([]);
+
   const dispatch = useDispatch();
 
   const handleInputChange = e => {
     setLocation(e.target.value);
   };
-
-  // const handleAcChange = () => {
-  //   setAC(true);
-  // };
-
-  // const handleAutomaticChange = () => {
-  //   setTransmission('automatic');
-  // };
 
   const handleCheckboxChange = name => {
     if (name === 'ac') {
@@ -76,10 +75,27 @@ export const Catalog = () => {
       form,
     };
 
-    // Dispatch action with query parameters
+    //We filter the parameters, leaving only those that are true
+    for (let key in query) {
+      if (!query[key]) delete query[key];
+    }
+    console.log(query);
+
     dispatch(fetchCampersThunc(query));
     setLocation('');
+    setAC(false);
+    setTransmission('');
+    setKitchen(false);
+    setTV(false);
+    setBathroom(false);
     setForm('');
+
+    if (locationRef.current) locationRef.current.value = '';
+    checkboxesRef.current.forEach(checkbox => (checkbox.checked = false));
+    radioRefs.current.forEach(radio => {
+      if (radio) radio.checked = false;
+    });
+    // radioRefs.current.forEach(radio => (radio.checked = false));
 
     console.log('query ', query);
   };
@@ -101,6 +117,7 @@ export const Catalog = () => {
                 name="location"
                 placeholder="City"
                 onChange={handleInputChange}
+                ref={locationRef}
               ></input>
               <svg className={css.mapSvg}>
                 <use href="/symbol-defs.svg#icon-Vector-6"></use>
@@ -123,6 +140,7 @@ export const Catalog = () => {
                     className={css.checkboxInput}
                     name="ac"
                     onChange={() => handleCheckboxChange('ac')}
+                    ref={el => (checkboxesRef.current[0] = el)}
                   />
                   <div className={css.contSvgEquipment}>
                     <svg className={css.svgEquipment}>
@@ -139,6 +157,7 @@ export const Catalog = () => {
                     className={css.checkboxInput}
                     name="transmission"
                     onChange={() => handleCheckboxChange('transmission')}
+                    ref={el => (checkboxesRef.current[1] = el)}
                   />
                   <div className={css.contSvgEquipment}>
                     <svg className={css.svgEquipment}>
@@ -155,6 +174,7 @@ export const Catalog = () => {
                     className={css.checkboxInput}
                     name="kitchen"
                     onChange={() => handleCheckboxChange('kitchen')}
+                    ref={el => (checkboxesRef.current[2] = el)}
                   />
                   <div className={css.contSvgEquipment}>
                     <svg className={css.svgEquipment}>
@@ -171,6 +191,7 @@ export const Catalog = () => {
                     className={css.checkboxInput}
                     name="TV"
                     onChange={() => handleCheckboxChange('TV')}
+                    ref={el => (checkboxesRef.current[3] = el)}
                   />
                   <div className={css.contSvgEquipment}>
                     <svg className={css.svgEquipment}>
@@ -187,6 +208,7 @@ export const Catalog = () => {
                     className={css.checkboxInput}
                     name="bathroom"
                     onChange={() => handleCheckboxChange('bathroom')}
+                    ref={el => (checkboxesRef.current[4] = el)}
                   />
                   <div className={css.contSvgEquipment}>
                     <svg className={css.svgEquipment}>
@@ -216,6 +238,7 @@ export const Catalog = () => {
                     name="vehicleType"
                     value="panelTruck"
                     onChange={handleRadioChange}
+                    ref={el => (radioRefs.current[0] = el)}
                   />
                   <div className={css.contSvgEquipment}>
                     <svg className={css.svgEquipment}>
@@ -233,6 +256,7 @@ export const Catalog = () => {
                     name="vehicleType"
                     value="fullyIntegrated"
                     onChange={handleRadioChange}
+                    ref={el => (radioRefs.current[1] = el)}
                   />
                   <div className={`${css.contSvgEquipment} ${css.fullyIntegrated}`}>
                     <svg className={css.svgEquipment}>
@@ -250,6 +274,7 @@ export const Catalog = () => {
                     name="vehicleType"
                     value="alcove"
                     onChange={handleRadioChange}
+                    ref={el => (radioRefs.current[2] = el)}
                   />
                   <div className={css.contSvgEquipment}>
                     <svg className={css.svgEquipment}>
