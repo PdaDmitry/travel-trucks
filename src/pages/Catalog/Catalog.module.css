@@ -88,14 +88,60 @@
   margin-bottom: 24px;
 }
 
+/* =================filter======================= */
+
 .equipmentList {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
+  /* !!!!!!!!!!!!!!!!! */
+  /* list-style: none; */
+  /* padding: 0;
+  margin: 0; */
 }
 
 .equipmentItem {
   width: calc((100% - 24px)/3);
+  /* !!!!!!!!!!!!!!!!! */
+  /* list-style: none; */
+}
+
+.equipmentLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  /* padding: 10px; */
+  /* Внутренний отступ */
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.checkboxInput {
+  display: none;
+}
+
+.checkboxInput:checked+.contSvgEquipment {
+  border: 2px solid #e44848;
+  /* Рамка контейнера становится красной */
+}
+
+/* ================================================= */
+
+.searchBtn {
+  border-radius: 200px;
+  border: none;
+  /* padding: 16px 60px; */
+  width: 166px;
+  height: 56px;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  color: #fff;
+  background-color: #e44848;
+}
+
+.searchBtn:hover {
+  background-color: #d84343;
 }
 
 .campersList {
@@ -113,6 +159,8 @@
   height: 96px;
   mix-blend-mode: multiply;
   text-align: center;
+  /* !!!!!!!!!!!!!!!!!!! */
+  transition: border-color 0.3s ease;
 }
 
 .svgEquipment {
@@ -120,12 +168,23 @@
   width: 32px;
   height: 32px;
   margin-bottom: 8px;
+  /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+  /* fill: currentColor; */
 }
 
 .textEquipment {
   font-size: 16px;
   letter-spacing: -0.01em;
   padding-left: 0;
+}
+
+.contTypeFilter {
+  margin-bottom: 40px;
+}
+
+.vehicleType {
+  display: flex;
+  gap: 12px;
 }
 
 .btnLoadMore {

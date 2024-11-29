@@ -44,61 +44,111 @@ export const Catalog = () => {
               </svg>
             </div>
           </div>
+          {/* ======================Filter checkbox======================= */}
+
           <div className={css.equipmentFilter}>
             <p className={css.textFilter}>Filters</p>
             <p className={css.titleEquipment}>Vehicle equipment</p>
             <svg className={css.svgLineFilter}>
               <use href="/symbol-line-filter.svg#icon-Divider-filter"></use>
             </svg>
+
             <ul className={css.equipmentList}>
               <li className={css.equipmentItem}>
-                <div className={css.contSvgEquipment}>
-                  <svg className={css.svgEquipment}>
-                    <use href="/symbol-defs.svg#icon-Vector-10"></use>
-                  </svg>
-                  <p className={css.textEquipment}>AC</p>
-                </div>
+                <label className={css.equipmentLabel}>
+                  <input type="checkbox" className={css.checkboxInput} />
+                  <div className={css.contSvgEquipment}>
+                    <svg className={css.svgEquipment}>
+                      <use href="/symbol-defs.svg#icon-Vector-10"></use>
+                    </svg>
+                    <p className={css.textEquipment}>AC</p>
+                  </div>
+                </label>
               </li>
               <li className={css.equipmentItem}>
-                <div className={css.contSvgEquipment}>
-                  <svg className={css.svgEquipment}>
-                    <use href="/symbol-defs.svg#icon-Vector-12"></use>
-                  </svg>
-                  <p className={css.textEquipment}>Automatic</p>
-                </div>
+                <label className={css.equipmentLabel}>
+                  <input type="checkbox" className={css.checkboxInput} />
+                  <div className={css.contSvgEquipment}>
+                    <svg className={css.svgEquipment}>
+                      <use href="/symbol-defs.svg#icon-Vector-12"></use>
+                    </svg>
+                    <p className={css.textEquipment}>Automatic</p>
+                  </div>
+                </label>
               </li>
               <li className={css.equipmentItem}>
-                <div className={css.contSvgEquipment}>
-                  <svg className={css.svgEquipment}>
-                    <use href="/symbol-defs.svg#icon-Group-6"></use>
-                  </svg>
-                  <p className={css.textEquipment}>Kitchen</p>
-                </div>
+                <label className={css.equipmentLabel}>
+                  <input type="checkbox" className={css.checkboxInput} />
+                  <div className={css.contSvgEquipment}>
+                    <svg className={css.svgEquipment}>
+                      <use href="/symbol-defs.svg#icon-Group-6"></use>
+                    </svg>
+                    <p className={css.textEquipment}>Kitchen</p>
+                  </div>
+                </label>
               </li>
               <li className={css.equipmentItem}>
-                <div className={css.contSvgEquipment}>
-                  <svg className={css.svgEquipment}>
-                    <use href="/symbol-defs.svg#icon-Vector-7"></use>
-                  </svg>
-                  <p className={css.textEquipment}>TV</p>
-                </div>
+                <label className={css.equipmentLabel}>
+                  <input type="checkbox" className={css.checkboxInput} />
+                  <div className={css.contSvgEquipment}>
+                    <svg className={css.svgEquipment}>
+                      <use href="/symbol-defs.svg#icon-Vector-7"></use>
+                    </svg>
+                    <p className={css.textEquipment}>TV</p>
+                  </div>
+                </label>
               </li>
               <li className={css.equipmentItem}>
+                <label className={css.equipmentLabel}>
+                  <input type="checkbox" className={css.checkboxInput} />
+                  <div className={css.contSvgEquipment}>
+                    <svg className={css.svgEquipment}>
+                      <use href="/symbol-defs.svg#icon-Vector-8"></use>
+                    </svg>
+                    <p className={css.textEquipment}>Bathroom</p>
+                  </div>
+                </label>
+              </li>
+            </ul>
+            {/* ========================Filter checkbox============================= */}
+          </div>
+          <div className={css.contTypeFilter}>
+            <div>
+              <p className={css.titleEquipment}>Vehicle type</p>
+              <svg className={css.svgLineFilter}>
+                <use href="/symbol-line-filter.svg#icon-Divider-filter"></use>
+              </svg>
+            </div>
+            <ul className={css.vehicleType}>
+              <li>
                 <div className={css.contSvgEquipment}>
                   <svg className={css.svgEquipment}>
-                    <use href="/symbol-defs.svg#icon-Vector-8"></use>
+                    <use href="/symbol-defs.svg#icon-Vector-11"></use>
                   </svg>
-                  <p className={css.textEquipment}>Bathroom</p>
+                  <p className={css.textEquipment}>Van</p>
+                </div>
+              </li>
+              <li>
+                <div className={css.contSvgEquipment}>
+                  <svg className={css.svgEquipment}>
+                    <use href="/symbol-defs.svg#icon-Vector-13"></use>
+                  </svg>
+                  <p className={css.textEquipment}>Fully Integrated</p>
+                </div>
+              </li>
+              <li>
+                <div className={css.contSvgEquipment}>
+                  <svg className={css.svgEquipment}>
+                    <use href="/symbol-defs.svg#icon-Vector-14"></use>
+                  </svg>
+                  <p className={css.textEquipment}>Alcove</p>
                 </div>
               </li>
             </ul>
           </div>
-          <div>
-            <p className={css.titleEquipment}>Vehicle type</p>
-            <svg className={css.svgLineFilter}>
-              <use href="/symbol-line-filter.svg#icon-Divider-filter"></use>
-            </svg>
-          </div>
+          <button type="submit" className={css.searchBtn}>
+            Search
+          </button>
         </div>
 
         <div>
