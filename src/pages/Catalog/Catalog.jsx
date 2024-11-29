@@ -8,14 +8,28 @@ import { selectMaxPage } from '../../redux/catalog/selectors';
 export const Catalog = () => {
   const [page, setPage] = useState(1);
   const [loadMore, setLoadMore] = useState(true);
+  const [location, setLocation] = useState({});
 
   const maxPage = useSelector(selectMaxPage);
   const dispatch = useDispatch();
-
+  let query = {};
   const handleLoadMore = () => {
     if (page < maxPage) {
       setPage(prevPage => prevPage + 1);
     }
+  };
+
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+
+    setLocation(prevLocation => ({
+      ...prevLocation,
+      [name]: value,
+    }));
+  };
+
+  const handleSearch = () => {
+    query.city = location.city;
   };
 
   useEffect(() => {
@@ -27,8 +41,9 @@ export const Catalog = () => {
   }, [page, maxPage]);
 
   useEffect(() => {
-    dispatch(fetchCampersThunc());
-  }, [dispatch]);
+    dispatch(fetchCampersThunc(query));
+    setLocation({});
+  }, [dispatch, query]);
 
   return (
     <section className={css.contCatalog}>
@@ -38,13 +53,17 @@ export const Catalog = () => {
           <div className={css.contLocat}>
             <p className={css.textLocat}>Location</p>
             <div className={css.inputWrap}>
-              <input className={css.inputLocat} placeholder="City"></input>
+              <input
+                className={css.inputLocat}
+                name="location"
+                placeholder="City"
+                onChange={handleInputChange}
+              ></input>
               <svg className={css.mapSvg}>
                 <use href="/symbol-defs.svg#icon-Vector-6"></use>
               </svg>
             </div>
           </div>
-          {/* ======================Filter checkbox======================= */}
 
           <div className={css.equipmentFilter}>
             <p className={css.textFilter}>Filters</p>
@@ -52,7 +71,7 @@ export const Catalog = () => {
             <svg className={css.svgLineFilter}>
               <use href="/symbol-line-filter.svg#icon-Divider-filter"></use>
             </svg>
-
+            {/* ======================Filter checkboxes======================= */}
             <ul className={css.equipmentList}>
               <li className={css.equipmentItem}>
                 <label className={css.equipmentLabel}>
@@ -110,7 +129,7 @@ export const Catalog = () => {
                 </label>
               </li>
             </ul>
-            {/* ========================Filter checkbox============================= */}
+            {/* ===================================================== */}
           </div>
           <div className={css.contTypeFilter}>
             <div>
@@ -119,34 +138,60 @@ export const Catalog = () => {
                 <use href="/symbol-line-filter.svg#icon-Divider-filter"></use>
               </svg>
             </div>
+            {/* =====================Filter radio buttons================================= */}
             <ul className={css.vehicleType}>
               <li>
-                <div className={css.contSvgEquipment}>
-                  <svg className={css.svgEquipment}>
-                    <use href="/symbol-defs.svg#icon-Vector-11"></use>
-                  </svg>
-                  <p className={css.textEquipment}>Van</p>
-                </div>
+                <label>
+                  <input
+                    type="radio"
+                    className={css.checkboxInput}
+                    name="equipment"
+                    value="Alcove"
+                  />
+                  <div className={css.contSvgEquipment}>
+                    <svg className={css.svgEquipment}>
+                      <use href="/symbol-defs.svg#icon-Vector-11"></use>
+                    </svg>
+                    <p className={css.textEquipment}>Van</p>
+                  </div>
+                </label>
               </li>
               <li>
-                <div className={css.contSvgEquipment}>
-                  <svg className={css.svgEquipment}>
-                    <use href="/symbol-defs.svg#icon-Vector-13"></use>
-                  </svg>
-                  <p className={css.textEquipment}>Fully Integrated</p>
-                </div>
+                <label>
+                  <input
+                    type="radio"
+                    className={css.checkboxInput}
+                    name="equipment"
+                    value="Alcove"
+                  />
+                  <div className={css.contSvgEquipment}>
+                    <svg className={css.svgEquipment}>
+                      <use href="/symbol-defs.svg#icon-Vector-13"></use>
+                    </svg>
+                    <p className={css.textEquipment}>Fully Integrated</p>
+                  </div>
+                </label>
               </li>
               <li>
-                <div className={css.contSvgEquipment}>
-                  <svg className={css.svgEquipment}>
-                    <use href="/symbol-defs.svg#icon-Vector-14"></use>
-                  </svg>
-                  <p className={css.textEquipment}>Alcove</p>
-                </div>
+                <label>
+                  <input
+                    type="radio"
+                    className={css.checkboxInput}
+                    name="equipment"
+                    value="Alcove"
+                  />
+                  <div className={css.contSvgEquipment}>
+                    <svg className={css.svgEquipment}>
+                      <use href="/symbol-defs.svg#icon-Vector-14"></use>
+                    </svg>
+                    <p className={css.textEquipment}>Alcove</p>
+                  </div>
+                </label>
               </li>
             </ul>
+            {/* ============================================================ */}
           </div>
-          <button type="submit" className={css.searchBtn}>
+          <button type="submit" className={css.searchBtn} onClick={handleSearch}>
             Search
           </button>
         </div>
