@@ -53,6 +53,7 @@ export const Catalog = () => {
   useEffect(() => {
     if (page >= maxPage) {
       setLoadMore(false);
+      console.log('page = ', page);
     } else {
       setLoadMore(true);
     }
@@ -65,6 +66,7 @@ export const Catalog = () => {
   };
 
   const handleSearch = () => {
+    setPage(1);
     const query = {
       location,
       AC,
@@ -79,7 +81,6 @@ export const Catalog = () => {
     for (let key in query) {
       if (!query[key]) delete query[key];
     }
-    console.log(query);
 
     dispatch(fetchCampersThunc(query));
     setLocation('');
@@ -119,8 +120,13 @@ export const Catalog = () => {
                 onChange={handleInputChange}
                 ref={locationRef}
               ></input>
-              <svg className={css.mapSvg}>
+              {/* <svg className={css.mapSvg}>
                 <use href="/symbol-defs.svg#icon-Vector-6"></use>
+              </svg> */}
+              <svg className={css.mapSvg}>
+                <use
+                  href={location ? '/symbol-defs.svg#icon-Map' : '/symbol-defs.svg#icon-Vector-6'}
+                ></use>
               </svg>
             </div>
           </div>

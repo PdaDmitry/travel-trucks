@@ -15,7 +15,7 @@ export const CampersList = ({ page }) => {
     <ul className={css.contList}>
       {campers.slice(startIndex, endIndex).map(camper => (
         <li key={camper.id}>
-          <Camper data={camper} />
+          <Camper id={camper.id} />
         </li>
       ))}
     </ul>

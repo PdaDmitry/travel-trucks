@@ -38,7 +38,6 @@
   font-size: 16px;
   line-height: 150%;
   align-items: center;
-  /* direction: rtl; */
 }
 
 .locationSvg {
@@ -87,7 +86,8 @@
   margin-bottom: 24px;
 }
 
-.navPage {}
+.navPage {
+}
 
 .page {
   font-weight: 600;
