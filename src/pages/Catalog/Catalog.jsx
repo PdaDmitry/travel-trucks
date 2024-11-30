@@ -20,7 +20,7 @@ export const Catalog = () => {
 
   const maxPage = useSelector(selectMaxPage);
   const total = useSelector(selectTotal);
-  console.log('Total ', total);
+  // console.log('Total ', total);
   //We use the ref to clear the fields after the request
   const locationRef = useRef(null);
   const checkboxesRef = useRef([]);

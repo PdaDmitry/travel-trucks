@@ -87,6 +87,39 @@
   margin-bottom: 24px;
 }
 
+.contSvgParams {
+  display: flex;
+  /* flex-wrap: wrap; */
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.svgParamsElem {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  border-radius: 100px;
+  padding: 12px 18px;
+  background-color: #f2f4f7;
+  mix-blend-mode: multiply;
+  /* width: calc((100% - 24px) / 4); */
+}
+
+.svgParamsLast {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  border-radius: 100px;
+  padding: 12px 18px;
+  background-color: #f2f4f7;
+  mix-blend-mode: multiply;
+  margin-bottom: 24px;
+}
+
+.svg {
+  margin-right: 8px;
+}
+
 .camperBtn {
   border-radius: 200px;
   border: none;
