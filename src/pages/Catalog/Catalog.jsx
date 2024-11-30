@@ -20,7 +20,7 @@ export const Catalog = () => {
 
   const maxPage = useSelector(selectMaxPage);
   const total = useSelector(selectTotal);
-  console.log('Total ', total);
+  // console.log('Total ', total);
   //We use the ref to clear the fields after the request
   const locationRef = useRef(null);
   const checkboxesRef = useRef([]);
@@ -96,7 +96,6 @@ export const Catalog = () => {
     radioRefs.current.forEach(radio => {
       if (radio) radio.checked = false;
     });
-    // radioRefs.current.forEach(radio => (radio.checked = false));
   };
 
   useEffect(() => {
@@ -118,9 +117,6 @@ export const Catalog = () => {
                 onChange={handleInputChange}
                 ref={locationRef}
               ></input>
-              {/* <svg className={css.mapSvg}>
-                <use href="/symbol-defs.svg#icon-Vector-6"></use>
-              </svg> */}
               <svg className={css.mapSvg}>
                 <use
                   href={location ? '/symbol-defs.svg#icon-Map' : '/symbol-defs.svg#icon-Vector-6'}

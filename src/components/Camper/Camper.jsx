@@ -1,9 +1,10 @@
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useLocation, useParams } from 'react-router-dom';
 import css from './Camper.module.css';
 import { useSelector } from 'react-redux';
 import { selectCampersById } from '../../redux/catalog/selectors';
 
 export const Camper = ({ id }) => {
+  const locationPage = useLocation(); ////////////
   const camper = useSelector(selectCampersById(id));
 
   const {
@@ -84,7 +85,7 @@ export const Camper = ({ id }) => {
             {AC && <p>AC</p>}
           </div>
         </div>
-        <NavLink to={`/catalog/${id}`}>
+        <NavLink to={`/catalog/${id}`} state={locationPage}>
           <button type="button" className={css.camperBtn}>
             Show more
           </button>

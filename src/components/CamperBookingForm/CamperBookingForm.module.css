@@ -36,38 +36,7 @@
   background-color: #f7f7f7;
   margin-bottom: 14px;
 }
-/* =========================Сalendar=========================== */
-.fieldDate {
-  position: relative;
-  padding: 18px;
-  font-size: 16px;
-  background-color: #f7f7f7;
-  border-radius: 12px;
-  border: none;
-  width: 100%;
-  height: 60px;
-  box-sizing: border-box;
-  cursor: pointer;
-  margin-bottom: 14px;
-}
 
-.fieldDate::before {
-  content: 'Booking Date*'; /* text placeholder */
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: #6c717b;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.fieldDate:focus::before,
-.fieldDate:not(:empty)::before {
-  opacity: 0; /* Hide placeholder on focus */
-}
-/* ==================================================== */
 .contInputTextarea {
 }
 
