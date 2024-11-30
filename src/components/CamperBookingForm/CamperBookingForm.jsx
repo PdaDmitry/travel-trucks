@@ -1,6 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-// import { ToastContainer, toast } from 'react-toastify';
 import css from './CamperBookingForm.module.css';
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
@@ -52,13 +51,6 @@ export const CamperBookingForm = () => {
     email: Yup.string().trim().email('Invalid email').required('Required'),
     comment: Yup.string().trim().max(200, 'Comment is too long (max 200 characters)'),
     bookingDate: Yup.string().required('Required'),
-    // .test('is-future-date', 'Date cannot be in the past', value => {
-    //   if (!value) return false;
-    //   const selectedDate = new Date(value);
-    //   const today = new Date();
-    //   today.setHours(0, 0, 0, 0);
-    //   return selectedDate >= today;
-    // }),
   });
 
   return (
@@ -82,8 +74,9 @@ export const CamperBookingForm = () => {
               className={css.field}
               type="date"
               name="bookingDate"
-              placeholder="Booking Date*"
+              // placeholder="Booking Date*"
               required
+              min={new Date().toISOString().split('T')[0]} //Set the minimum date as today
             />
             <ErrorMessage className={css.errorText} name="bookingDate" component="span" />
           </div>
@@ -112,10 +105,17 @@ export const CamperBookingForm = () => {
             <p>Email: {modalData.email}</p>
             <p>Booking Date: {modalData.bookingDate}</p>
             <p>Comment: {modalData.comment || 'No comment provided'}</p>
-            <p className={css.checkReservation}>Check your reservation</p>
+            <br />
+            <p className={css.checkReservation}>
+              Check your reservation, are you sure you want to make a reservation?
+            </p>
             <div className={css.contModalBtn}>
-              <button onClick={handleYesClick}>Yes</button>
-              <button onClick={handleCancelClick}>Cancel</button>
+              <button className={css.btnYes} onClick={handleYesClick}>
+                Yes
+              </button>
+              <button className={css.btnCancel} onClick={handleCancelClick}>
+                Cancel
+              </button>
             </div>
           </div>
         </div>

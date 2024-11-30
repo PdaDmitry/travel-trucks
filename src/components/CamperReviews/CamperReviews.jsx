@@ -21,9 +21,26 @@ export const CamperReviews = () => {
             <ul className={css.reviewList}>
               {reviews.map((review, index) => (
                 <li key={index} className={css.reviewItem}>
-                  <h4>{review.reviewer_name}</h4>
-                  <p>Rating: {review.reviewer_rating}/5</p>
-                  <p>{review.comment}</p>
+                  <div className={css.contNameSvg}>
+                    <div className={css.avatar}>{review.reviewer_name[0]}</div>
+                    <div>
+                      <h4 className={css.name}>{review.reviewer_name}</h4>
+                      <div className={css.rating}>
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <svg key={i} className={css.star}>
+                            <use
+                              href={
+                                i < review.reviewer_rating
+                                  ? '/symbol-defs.svg#icon-Property-1Pressed' // Yellow star icon
+                                  : '/symbol-defs.svg#icon-Rating' // Gray star icon
+                              }
+                            ></use>
+                          </svg>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <p className={css.textReview}>{review.comment}</p>
                 </li>
               ))}
             </ul>

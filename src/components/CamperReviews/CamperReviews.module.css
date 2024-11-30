@@ -19,6 +19,40 @@
 .reviewItem {
   margin-bottom: 44px;
 }
+.contNameSvg {
+  padding-top: 12px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 60px;
+  width: 60px;
+  height: 60px;
+  background-color: #f2f4f7;
+
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  color: #e44848;
+}
+
+.name {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.star {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
 
 .reviewer_name {
   font-weight: 500;
@@ -26,8 +60,9 @@
   line-height: 150%;
 }
 
-.comment {
+.textReview {
   font-weight: 400;
   font-size: 16px;
+  line-height: 150%;
   color: #475467;
 }
