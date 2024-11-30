@@ -1,17 +1,13 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 import css from './CamperBookingForm.module.css';
 import { useState } from 'react';
-// import { useId } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 export const CamperBookingForm = () => {
   const [modalData, setModalData] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  //   const nameId = useId();
-  //   const emailId = useId();
-  //   const bookingDateId = useId();
-  //   const commentId = useId();
 
   const initState = {
     name: '',
@@ -27,19 +23,28 @@ export const CamperBookingForm = () => {
   };
 
   const handleYesClick = () => {
-    toast.success('Booking was successful', {
-      position: toast.POSITION.TOP_CENTER, // Позиция сверху
-      autoClose: 4000, // Время отображения тоста
-    });
     setIsOpen(false);
+    toast.success(`Booking was successful`, {
+      duration: 4000,
+      position: 'top-center',
+      style: {
+        background: 'orange',
+        color: 'black',
+      },
+    });
   };
 
   const handleCancelClick = () => {
-    toast.error('Cancellation', {
-      position: toast.POSITION.TOP_CENTER, // Позиция сверху
-      autoClose: 4000, // Время отображения тоста
-    });
     setIsOpen(false);
+
+    toast.error(`Cancellation`, {
+      duration: 4000,
+      position: 'bottom-center',
+      style: {
+        background: 'orange',
+        color: 'black',
+      },
+    });
   };
 
   const camperSchema = Yup.object().shape({
@@ -63,26 +68,12 @@ export const CamperBookingForm = () => {
       <Formik initialValues={initState} onSubmit={handleSubmit} validationSchema={camperSchema}>
         <Form className={css.form} autoComplete="off">
           <div className={css.contInput}>
-            <Field
-              className={css.field}
-              type="text"
-              // id={nameId}
-              name="name"
-              placeholder="Name*"
-              required
-            />
+            <Field className={css.field} type="text" name="name" placeholder="Name*" required />
             <ErrorMessage className={css.errorText} name="name" component="span" />
           </div>
 
           <div className={css.contInput}>
-            <Field
-              className={css.field}
-              type="email"
-              // id={emailId}
-              name="email"
-              placeholder="Email*"
-              required
-            />
+            <Field className={css.field} type="email" name="email" placeholder="Email*" required />
             <ErrorMessage className={css.errorText} name="email" component="span" />
           </div>
 
@@ -90,7 +81,6 @@ export const CamperBookingForm = () => {
             <Field
               className={css.field}
               type="date"
-              // id={bookingDateId}
               name="bookingDate"
               placeholder="Booking Date*"
               required
@@ -102,7 +92,6 @@ export const CamperBookingForm = () => {
             <Field
               className={css.fieldTextarea}
               as="textarea"
-              // id={commentId}
               name="comment"
               placeholder="Comment"
             />
@@ -123,13 +112,15 @@ export const CamperBookingForm = () => {
             <p>Email: {modalData.email}</p>
             <p>Booking Date: {modalData.bookingDate}</p>
             <p>Comment: {modalData.comment || 'No comment provided'}</p>
-            <p className={css.checkReservation}>Check your reservation</p> {/* Добавлена строка */}
-            <button onClick={handleCancelClick}>Cancel</button>
-            <button onClick={handleYesClick}>Yes</button>
+            <p className={css.checkReservation}>Check your reservation</p>
+            <div className={css.contModalBtn}>
+              <button onClick={handleYesClick}>Yes</button>
+              <button onClick={handleCancelClick}>Cancel</button>
+            </div>
           </div>
         </div>
       )}
-      <ToastContainer />
+      <Toaster />
     </div>
   );
 };
