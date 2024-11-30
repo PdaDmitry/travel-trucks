@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchCampersThunc, fetchCampersThuncById } from './operations';
 
+const handleErrorState = state => {
+  state.isLoading = false;
+  state.isError = true;
+};
+
 const initialState = {
   items: [],
   isLoading: false,
@@ -28,10 +33,7 @@ const catalogSlice = createSlice({
         state.total = state.items.length;
         state.maxPage = Math.ceil(state.total / state.perPage);
       })
-      .addCase(fetchCampersThunc.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-      })
+      .addCase(fetchCampersThunc.rejected, handleErrorState)
       //Loading a camper by ID
       .addCase(fetchCampersThuncById.pending, (state, action) => {
         state.isLoading = true;
@@ -42,10 +44,7 @@ const catalogSlice = createSlice({
         state.isLoading = false;
         state.selectedCamper = action.payload; //Save the selected camper
       })
-      .addCase(fetchCampersThuncById.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-      });
+      .addCase(fetchCampersThuncById.rejected, handleErrorState);
   },
 });
 

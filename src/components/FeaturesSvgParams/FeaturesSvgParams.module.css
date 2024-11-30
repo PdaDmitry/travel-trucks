@@ -1,0 +1,23 @@
+.contIconParams {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 527px;
+  height: 104px;
+  margin-bottom: 8px;
+}
+
+.iconParamsElem {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  height: 48px;
+  border-radius: 100px;
+  padding: 12px 18px;
+  background-color: #f2f4f7;
+  mix-blend-mode: multiply;
+}
+
+.svgIcon {
+  margin-right: 8px;
+}
