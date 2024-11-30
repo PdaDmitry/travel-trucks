@@ -3,9 +3,18 @@ import css from './Catalog.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { fetchCampersThunc } from '../../redux/catalog/operations';
 import { CampersList } from '../../components/СampersList/CampersList';
-import { selectMaxPage, selectTotal } from '../../redux/catalog/selectors';
+import {
+  selectIsError,
+  selectIsLoading,
+  selectMaxPage,
+  selectTotal,
+} from '../../redux/catalog/selectors';
+import Loader from '../../components/Loader/Loader';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
 export const Catalog = () => {
+  const loading = useSelector(selectIsLoading);
+  const error = useSelector(selectIsError);
   const [page, setPage] = useState(1);
   const [loadMore, setLoadMore] = useState(true);
   const [location, setLocation] = useState('');
@@ -103,207 +112,215 @@ export const Catalog = () => {
   }, [dispatch]);
 
   return (
-    <section className={css.contCatalog}>
-      <h2 className={css.visuallyHidden}>Catalog</h2>
-      <div className={css.catalog}>
-        <div className={css.contFilter}>
-          <div className={css.contLocat}>
-            <p className={css.textLocat}>Location</p>
-            <div className={css.inputWrap}>
-              <input
-                className={css.inputLocat}
-                name="location"
-                placeholder="City"
-                onChange={handleInputChange}
-                ref={locationRef}
-              ></input>
-              <svg className={css.mapSvg}>
-                <use
-                  href={location ? '/symbol-defs.svg#icon-Map' : '/symbol-defs.svg#icon-Vector-6'}
-                ></use>
-              </svg>
-            </div>
-          </div>
+    <div>
+      {loading && <Loader />}
+      {error && <ErrorMessage />}
+      {!error && (
+        <section className={css.contCatalog}>
+          <h2 className={css.visuallyHidden}>Catalog</h2>
+          <div className={css.catalog}>
+            <div className={css.contFilter}>
+              <div className={css.contLocat}>
+                <p className={css.textLocat}>Location</p>
+                <div className={css.inputWrap}>
+                  <input
+                    className={css.inputLocat}
+                    name="location"
+                    placeholder="City"
+                    onChange={handleInputChange}
+                    ref={locationRef}
+                  ></input>
+                  <svg className={css.mapSvg}>
+                    <use
+                      href={
+                        location ? '/symbol-defs.svg#icon-Map' : '/symbol-defs.svg#icon-Vector-6'
+                      }
+                    ></use>
+                  </svg>
+                </div>
+              </div>
 
-          <div className={css.equipmentFilter}>
-            <p className={css.textFilter}>Filters</p>
-            <p className={css.titleEquipment}>Vehicle equipment</p>
-            <svg className={css.svgLineFilter}>
-              <use href="/symbol-line-filter.svg#icon-Divider-filter"></use>
-            </svg>
-            {/* ======================Filter checkboxes======================= */}
-            <ul className={css.equipmentList}>
-              <li className={css.equipmentItem}>
-                <label className={css.equipmentLabel}>
-                  <input
-                    type="checkbox"
-                    className={css.checkboxInput}
-                    name="ac"
-                    onChange={() => handleCheckboxChange('ac')}
-                    ref={el => (checkboxesRef.current[0] = el)}
-                  />
-                  <div className={css.contSvgEquipment}>
-                    <svg className={css.svgEquipment}>
-                      <use href="/symbol-defs.svg#icon-Vector-10"></use>
-                    </svg>
-                    <p className={css.textEquipment}>AC</p>
-                  </div>
-                </label>
-              </li>
-              <li className={css.equipmentItem}>
-                <label className={css.equipmentLabel}>
-                  <input
-                    type="checkbox"
-                    className={css.checkboxInput}
-                    name="transmission"
-                    onChange={() => handleCheckboxChange('transmission')}
-                    ref={el => (checkboxesRef.current[1] = el)}
-                  />
-                  <div className={css.contSvgEquipment}>
-                    <svg className={css.svgEquipment}>
-                      <use href="/symbol-defs.svg#icon-Vector-12"></use>
-                    </svg>
-                    <p className={css.textEquipment}>Automatic</p>
-                  </div>
-                </label>
-              </li>
-              <li className={css.equipmentItem}>
-                <label className={css.equipmentLabel}>
-                  <input
-                    type="checkbox"
-                    className={css.checkboxInput}
-                    name="kitchen"
-                    onChange={() => handleCheckboxChange('kitchen')}
-                    ref={el => (checkboxesRef.current[2] = el)}
-                  />
-                  <div className={css.contSvgEquipment}>
-                    <svg className={css.svgEquipment}>
-                      <use href="/symbol-defs.svg#icon-Group-6"></use>
-                    </svg>
-                    <p className={css.textEquipment}>Kitchen</p>
-                  </div>
-                </label>
-              </li>
-              <li className={css.equipmentItem}>
-                <label className={css.equipmentLabel}>
-                  <input
-                    type="checkbox"
-                    className={css.checkboxInput}
-                    name="TV"
-                    onChange={() => handleCheckboxChange('TV')}
-                    ref={el => (checkboxesRef.current[3] = el)}
-                  />
-                  <div className={css.contSvgEquipment}>
-                    <svg className={css.svgEquipment}>
-                      <use href="/symbol-defs.svg#icon-Vector-7"></use>
-                    </svg>
-                    <p className={css.textEquipment}>TV</p>
-                  </div>
-                </label>
-              </li>
-              <li className={css.equipmentItem}>
-                <label className={css.equipmentLabel}>
-                  <input
-                    type="checkbox"
-                    className={css.checkboxInput}
-                    name="bathroom"
-                    onChange={() => handleCheckboxChange('bathroom')}
-                    ref={el => (checkboxesRef.current[4] = el)}
-                  />
-                  <div className={css.contSvgEquipment}>
-                    <svg className={css.svgEquipment}>
-                      <use href="/symbol-defs.svg#icon-Vector-8"></use>
-                    </svg>
-                    <p className={css.textEquipment}>Bathroom</p>
-                  </div>
-                </label>
-              </li>
-            </ul>
-            {/* ===================================================== */}
-          </div>
-          <div className={css.contTypeFilter}>
+              <div className={css.equipmentFilter}>
+                <p className={css.textFilter}>Filters</p>
+                <p className={css.titleEquipment}>Vehicle equipment</p>
+                <svg className={css.svgLineFilter}>
+                  <use href="/symbol-line-filter.svg#icon-Divider-filter"></use>
+                </svg>
+                {/* ======================Filter checkboxes======================= */}
+                <ul className={css.equipmentList}>
+                  <li className={css.equipmentItem}>
+                    <label className={css.equipmentLabel}>
+                      <input
+                        type="checkbox"
+                        className={css.checkboxInput}
+                        name="ac"
+                        onChange={() => handleCheckboxChange('ac')}
+                        ref={el => (checkboxesRef.current[0] = el)}
+                      />
+                      <div className={css.contSvgEquipment}>
+                        <svg className={css.svgEquipment}>
+                          <use href="/symbol-defs.svg#icon-Vector-10"></use>
+                        </svg>
+                        <p className={css.textEquipment}>AC</p>
+                      </div>
+                    </label>
+                  </li>
+                  <li className={css.equipmentItem}>
+                    <label className={css.equipmentLabel}>
+                      <input
+                        type="checkbox"
+                        className={css.checkboxInput}
+                        name="transmission"
+                        onChange={() => handleCheckboxChange('transmission')}
+                        ref={el => (checkboxesRef.current[1] = el)}
+                      />
+                      <div className={css.contSvgEquipment}>
+                        <svg className={css.svgEquipment}>
+                          <use href="/symbol-defs.svg#icon-Vector-12"></use>
+                        </svg>
+                        <p className={css.textEquipment}>Automatic</p>
+                      </div>
+                    </label>
+                  </li>
+                  <li className={css.equipmentItem}>
+                    <label className={css.equipmentLabel}>
+                      <input
+                        type="checkbox"
+                        className={css.checkboxInput}
+                        name="kitchen"
+                        onChange={() => handleCheckboxChange('kitchen')}
+                        ref={el => (checkboxesRef.current[2] = el)}
+                      />
+                      <div className={css.contSvgEquipment}>
+                        <svg className={css.svgEquipment}>
+                          <use href="/symbol-defs.svg#icon-Group-6"></use>
+                        </svg>
+                        <p className={css.textEquipment}>Kitchen</p>
+                      </div>
+                    </label>
+                  </li>
+                  <li className={css.equipmentItem}>
+                    <label className={css.equipmentLabel}>
+                      <input
+                        type="checkbox"
+                        className={css.checkboxInput}
+                        name="TV"
+                        onChange={() => handleCheckboxChange('TV')}
+                        ref={el => (checkboxesRef.current[3] = el)}
+                      />
+                      <div className={css.contSvgEquipment}>
+                        <svg className={css.svgEquipment}>
+                          <use href="/symbol-defs.svg#icon-Vector-7"></use>
+                        </svg>
+                        <p className={css.textEquipment}>TV</p>
+                      </div>
+                    </label>
+                  </li>
+                  <li className={css.equipmentItem}>
+                    <label className={css.equipmentLabel}>
+                      <input
+                        type="checkbox"
+                        className={css.checkboxInput}
+                        name="bathroom"
+                        onChange={() => handleCheckboxChange('bathroom')}
+                        ref={el => (checkboxesRef.current[4] = el)}
+                      />
+                      <div className={css.contSvgEquipment}>
+                        <svg className={css.svgEquipment}>
+                          <use href="/symbol-defs.svg#icon-Vector-8"></use>
+                        </svg>
+                        <p className={css.textEquipment}>Bathroom</p>
+                      </div>
+                    </label>
+                  </li>
+                </ul>
+                {/* ===================================================== */}
+              </div>
+              <div className={css.contTypeFilter}>
+                <div>
+                  <p className={css.titleEquipment}>Vehicle type</p>
+                  <svg className={css.svgLineFilter}>
+                    <use href="/symbol-line-filter.svg#icon-Divider-filter"></use>
+                  </svg>
+                </div>
+                {/* =====================Filter radio buttons================================= */}
+                <ul className={css.vehicleType}>
+                  <li>
+                    <label>
+                      <input
+                        type="radio"
+                        className={css.checkboxInput}
+                        name="vehicleType"
+                        value="panelTruck"
+                        onChange={handleRadioChange}
+                        ref={el => (radioRefs.current[0] = el)}
+                      />
+                      <div className={css.contSvgEquipment}>
+                        <svg className={css.svgEquipment}>
+                          <use href="/symbol-defs.svg#icon-Vector-11"></use>
+                        </svg>
+                        <p className={css.textEquipment}>Van</p>
+                      </div>
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input
+                        type="radio"
+                        className={css.checkboxInput}
+                        name="vehicleType"
+                        value="fullyIntegrated"
+                        onChange={handleRadioChange}
+                        ref={el => (radioRefs.current[1] = el)}
+                      />
+                      <div className={`${css.contSvgEquipment} ${css.fullyIntegrated}`}>
+                        <svg className={css.svgEquipment}>
+                          <use href="/symbol-defs.svg#icon-Vector-13"></use>
+                        </svg>
+                        <p className={css.textEquipment}>Fully Integrated</p>
+                      </div>
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input
+                        type="radio"
+                        className={css.checkboxInput}
+                        name="vehicleType"
+                        value="alcove"
+                        onChange={handleRadioChange}
+                        ref={el => (radioRefs.current[2] = el)}
+                      />
+                      <div className={css.contSvgEquipment}>
+                        <svg className={css.svgEquipment}>
+                          <use href="/symbol-defs.svg#icon-Vector-14"></use>
+                        </svg>
+                        <p className={css.textEquipment}>Alcove</p>
+                      </div>
+                    </label>
+                  </li>
+                </ul>
+                {/* ============================================================ */}
+              </div>
+              <button type="submit" className={css.searchBtn} onClick={handleSearch}>
+                Search
+              </button>
+            </div>
+
             <div>
-              <p className={css.titleEquipment}>Vehicle type</p>
-              <svg className={css.svgLineFilter}>
-                <use href="/symbol-line-filter.svg#icon-Divider-filter"></use>
-              </svg>
+              <div className={css.campersList}>
+                <CampersList page={page} />
+              </div>
+
+              {loadMore && (
+                <button className={css.btnLoadMore} type="button" onClick={handleLoadMore}>
+                  Load more
+                </button>
+              )}
             </div>
-            {/* =====================Filter radio buttons================================= */}
-            <ul className={css.vehicleType}>
-              <li>
-                <label>
-                  <input
-                    type="radio"
-                    className={css.checkboxInput}
-                    name="vehicleType"
-                    value="panelTruck"
-                    onChange={handleRadioChange}
-                    ref={el => (radioRefs.current[0] = el)}
-                  />
-                  <div className={css.contSvgEquipment}>
-                    <svg className={css.svgEquipment}>
-                      <use href="/symbol-defs.svg#icon-Vector-11"></use>
-                    </svg>
-                    <p className={css.textEquipment}>Van</p>
-                  </div>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input
-                    type="radio"
-                    className={css.checkboxInput}
-                    name="vehicleType"
-                    value="fullyIntegrated"
-                    onChange={handleRadioChange}
-                    ref={el => (radioRefs.current[1] = el)}
-                  />
-                  <div className={`${css.contSvgEquipment} ${css.fullyIntegrated}`}>
-                    <svg className={css.svgEquipment}>
-                      <use href="/symbol-defs.svg#icon-Vector-13"></use>
-                    </svg>
-                    <p className={css.textEquipment}>Fully Integrated</p>
-                  </div>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input
-                    type="radio"
-                    className={css.checkboxInput}
-                    name="vehicleType"
-                    value="alcove"
-                    onChange={handleRadioChange}
-                    ref={el => (radioRefs.current[2] = el)}
-                  />
-                  <div className={css.contSvgEquipment}>
-                    <svg className={css.svgEquipment}>
-                      <use href="/symbol-defs.svg#icon-Vector-14"></use>
-                    </svg>
-                    <p className={css.textEquipment}>Alcove</p>
-                  </div>
-                </label>
-              </li>
-            </ul>
-            {/* ============================================================ */}
           </div>
-          <button type="submit" className={css.searchBtn} onClick={handleSearch}>
-            Search
-          </button>
-        </div>
-
-        <div>
-          <div className={css.campersList}>
-            <CampersList page={page} />
-          </div>
-
-          {loadMore && (
-            <button className={css.btnLoadMore} type="button" onClick={handleLoadMore}>
-              Load more
-            </button>
-          )}
-        </div>
-      </div>
-    </section>
+        </section>
+      )}
+    </div>
   );
 };
