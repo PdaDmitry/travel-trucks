@@ -1,8 +1,70 @@
-# React + Vite
+1.  Назва проекту: "TravelTrucks"
+2.  Опис проєкту: "TravelTrucks" - це фронтенд веб-додаток для компанії, яка спеціалізується на
+    оренді кемперів. Додаток дозволяє користувачам переглядати каталог доступних кемперів,
+    фільтрувати їх за різноманітними параметрами, переглядати детальну інформацію про кемпер,
+    залишати відгуки та бронювати транспортні засоби.
+3.  Основні можливості: #Сторінки: - Головна сторінка: Містить банер із закликом до дії "View Now",
+    що веде до каталогу кемперів. Каталог кемперів: Відображає список доступних транспортних засобів
+    із можливістю фільтрації за такими критеріями:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Локація;
+- Тип кузова;
+- Види трансмісії;
+- Тип палива;
+- Наявність специфічних функцій (кондиціонер, кухня, ванна кімната, TV тощо);
 
-Currently, two official plugins are available:
+- Можливість додавати кемпери до списку обраних;
+- Пагінація та функція "Load More" для завантаження додаткових карток.
+- Деталі кемпера: Відображає повну інформацію про обраний кемпер (характеристики, габарити, доступні
+  функції). Також містить:
+- Галерею фотографій;
+- Відгуки користувачів із рейтингами.
+- Форму для бронювання з повідомленням про успішну відправку.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  # Функціонал:
+
+  Для реалізації функціоналу роботи з оголошеннями про кемпери використовується готовий бекенд API,
+  який доступний за посиланням: https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers
+
+Фреймворк та бібліотеки:
+
+Робота виконана з використанням бандлеру Vite на React. Redux для управління станом. React Router
+для маршрутизації. Для запитів використовується бібліотека Axios. Для встановлення Axios як
+бібліотеки скористайся NPM: npm install axios
+
+- Ендпоінти:
+
+  - GET /campers - отримання списку кемперів.
+  - GET /campers/:id - отримання деталей кемпера. Будь-яка CSS бібліотека на вибір (наприклад, CSS
+    модулі, styled-components, MUI тощо).
+
+- Фільтрація: Виконується на бекенді через API.
+- Обране: Кемпери можна додавати до списку обраних.
+- Маршрутизація:
+- / - Головна сторінка.
+- /catalog - Каталог кемперів.
+- /catalog/:id - Сторінка окремого кемпера.
+- Інтеграція з API:
+- Використовується React Loader: $ npm install react-loader-spinner --save Відображається під час
+  завантаження даних.
+
+  # Використані технології
+
+- Фреймворк: React.
+- Бандлер: Vite.
+- Управління станом: Redux.
+- Маршрутизація: React Router.
+- HTTP-клієнт: Axios.
+- Стилізація: CSS Modules / Styled-components.
+- Деплой: [Vercel](https://vercel.com) або [Netlify](https://netlify.com).
+
+4. Інструкція з установки: Клонувати репозиторій:
+   `bash git clone https://github.com/yourusername/traveltrucks.git` Перейти до папки проєкту: bash
+   Копировать код cd traveltrucks Встановити залежності: bash Копировать код npm install Запустити
+   локальний сервер: npm run dev Відкрити у браузері http://localhost:3000. Деплой Жива сторінка
+   доступна за посиланням: https://travel-trucks-tan.vercel.app/
+
+Автор Ім'я: Дмитро Поступаєв Email: Pda.gazcomp@gmail.com GitHub:
+https://github.com/PdaDmitry/travel-trucks Vercel:
+https://vercel.com/dmitry-postupaievs-projects/travel-trucks Внесок у проєкт: Будь ласка, створюйте
+pull requests або повідомляйте про проблеми для покращення проєкту.
