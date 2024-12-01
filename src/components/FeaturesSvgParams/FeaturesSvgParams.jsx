@@ -17,7 +17,7 @@ export const FeaturesSvgParams = () => {
     radio: '/symbol-defs.svg#icon-Vector-1',
     refrigerator: '/symbol-defs.svg#icon-Vector-9',
     microwave: '/symbol-defs.svg#icon-Group-4',
-    // gas: '/symbol-defs.svg#icon-Group-5',
+    gas: '/symbol-defs.svg#icon-Group-5',
     water: '/symbol-defs.svg#icon-Vector-15',
   };
 

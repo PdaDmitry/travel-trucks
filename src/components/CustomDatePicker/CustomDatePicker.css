@@ -1,5 +1,4 @@
 .customPopper {
-  /* z-index: 1000;  */
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -10,7 +9,7 @@
   border-radius: 32px;
   width: 36px;
   height: 32px;
-  background-color: #475467; /* Выбранный день */
+  background-color: #475467;
   color: white;
 }
 
@@ -21,7 +20,7 @@
   width: 36px;
   height: 32px;
   background-color: inherit;
-  margin: 5px; /* Устанавливаем отступы между днями */
+  margin: 5px;
   padding: 3px 5px;
 }
 
@@ -32,7 +31,7 @@
 }
 
 .customPopper .react-datepicker__header {
-  background-color: #f0f0f0; /* Фон заголовка */
+  background-color: #f0f0f0;
   border-bottom: 1px solid #ddd;
 }
 
