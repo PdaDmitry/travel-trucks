@@ -25,3 +25,15 @@ export const fetchCampersThuncById = createAsyncThunk('fetchCampersById', async 
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const fetchCampersFavoriteById = createAsyncThunk(
+  'fetchCampersFavoriteById',
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.get(`/campers/${id}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

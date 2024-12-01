@@ -12,3 +12,5 @@ export const selectCampersById = id =>
     [selectCampers], // array of all campers
     campers => campers.find(camper => camper.id === id) // Looking for a camper by ID
   );
+
+export const selectFavorites = state => state.campers.favorites;

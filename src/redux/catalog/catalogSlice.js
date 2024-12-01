@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCampersThunc, fetchCampersThuncById } from './operations';
+import { fetchCampersFavoriteById, fetchCampersThunc, fetchCampersThuncById } from './operations';
 
 const handleErrorState = state => {
   state.isLoading = false;
@@ -8,6 +8,7 @@ const handleErrorState = state => {
 
 const initialState = {
   items: [],
+  favorites: JSON.parse(localStorage.getItem('favorites')) || [],
   isLoading: false,
   isError: false,
   selectedCamper: null,
@@ -19,6 +20,12 @@ const initialState = {
 const catalogSlice = createSlice({
   name: 'campers',
   initialState,
+  reducers: {
+    updateFavorites(state, action) {
+      state.favorites = action.payload;
+      localStorage.setItem('favorites', JSON.stringify(state.favorites));
+    },
+  },
   extraReducers: builder => {
     builder
       //Loading all campers
@@ -44,7 +51,29 @@ const catalogSlice = createSlice({
         state.isLoading = false;
         state.selectedCamper = action.payload; //Save the selected camper
       })
-      .addCase(fetchCampersThuncById.rejected, handleErrorState);
+      .addCase(fetchCampersThuncById.rejected, handleErrorState)
+      //feavorite
+      .addCase(fetchCampersFavoriteById.pending, (state, action) => {
+        state.isLoading = true;
+        state.isError = false;
+      })
+      .addCase(fetchCampersFavoriteById.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        const camp = action.payload;
+        const camperIndex = state.favorites.findIndex(item => item.id === camp.id);
+
+        if (camperIndex === -1) {
+          state.favorites.push(camp);
+        } else {
+          state.favorites.splice(camperIndex, 1);
+        }
+        localStorage.setItem('favorites', JSON.stringify(state.favorites));
+      })
+      .addCase(fetchCampersFavoriteById.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.error.message;
+      });
   },
 });
 

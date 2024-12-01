@@ -1,39 +1,32 @@
 import { useDispatch, useSelector } from 'react-redux';
 import css from './Catalog.module.css';
 import { useEffect, useRef, useState } from 'react';
-import { fetchCampersThunc } from '../../redux/catalog/operations';
 import { CampersList } from '../../components/СampersList/CampersList';
-import {
-  selectIsError,
-  selectIsLoading,
-  selectMaxPage,
-  selectTotal,
-} from '../../redux/catalog/selectors';
+import { selectIsError, selectIsLoading, selectMaxPage } from '../../redux/catalog/selectors';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import toast, { Toaster } from 'react-hot-toast';
+import { fetchCampersThunc } from '../../redux/catalog/operations';
 
 export const Catalog = () => {
   const loading = useSelector(selectIsLoading);
   const error = useSelector(selectIsError);
+  const maxPage = useSelector(selectMaxPage);
+
+  //We use the ref to clear the fields after the request
+  const locationRef = useRef(null);
+  const checkboxesRef = useRef([]);
+  const radioRefs = useRef([]);
+
   const [page, setPage] = useState(1);
   const [loadMore, setLoadMore] = useState(true);
   const [location, setLocation] = useState('');
-
   const [AC, setAC] = useState(false);
   const [transmission, setTransmission] = useState('');
   const [kitchen, setKitchen] = useState(false);
   const [TV, setTV] = useState(false);
   const [bathroom, setBathroom] = useState(false);
-
   const [form, setForm] = useState('');
-
-  const maxPage = useSelector(selectMaxPage);
-  const total = useSelector(selectTotal);
-  // console.log('Total ', total);
-  //We use the ref to clear the fields after the request
-  const locationRef = useRef(null);
-  const checkboxesRef = useRef([]);
-  const radioRefs = useRef([]);
 
   const dispatch = useDispatch();
 
@@ -61,8 +54,15 @@ export const Catalog = () => {
 
   useEffect(() => {
     if (page >= maxPage) {
+      toast.error(`We're sorry, but you've reached the end of search results!`, {
+        duration: 4000,
+        position: 'bottom-center',
+        style: {
+          background: 'orange',
+          color: 'black',
+        },
+      });
       setLoadMore(false);
-      // console.log('page = ', page);
     } else {
       setLoadMore(true);
     }
@@ -113,6 +113,7 @@ export const Catalog = () => {
 
   return (
     <div>
+      <Toaster />
       {loading && <Loader />}
       {error && <ErrorMessage />}
       {!error && (

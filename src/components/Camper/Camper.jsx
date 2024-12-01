@@ -1,12 +1,20 @@
-import { NavLink, useLocation, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import css from './Camper.module.css';
-import { useSelector } from 'react-redux';
-import { selectCampersById } from '../../redux/catalog/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCampersById, selectFavorites } from '../../redux/catalog/selectors';
+import { fetchCampersFavoriteById } from '../../redux/catalog/operations';
+import { useState } from 'react';
 
 export const Camper = ({ id }) => {
-  const locationPage = useLocation(); ////////////
+  const dispatch = useDispatch();
+  const [isFavorite, setIsFavorite] = useState(() => {
+    const savedFavorite = localStorage.getItem(`favorite-${id}`);
+    return savedFavorite === 'true';
+  });
   const camper = useSelector(selectCampersById(id));
 
+  const favorites = useSelector(selectFavorites);
+  console.log(favorites);
   const {
     name,
     price,
@@ -29,6 +37,17 @@ export const Camper = ({ id }) => {
     panelTruck: 'Vector-11',
   };
 
+  // ================Favorites========================
+  const handleFavoriteToggle = () => {
+    setIsFavorite(prev => {
+      const newFavoriteState = !prev;
+      localStorage.setItem(`favorite-${id}`, newFavoriteState.toString());
+      return newFavoriteState;
+    });
+    dispatch(fetchCampersFavoriteById(id));
+  };
+  // =================================================
+
   return (
     <div className={css.contCamper}>
       <div className={css.backgroundImage} style={{ backgroundImage: `url(${firstImage})` }}></div>
@@ -37,9 +56,17 @@ export const Camper = ({ id }) => {
           <h3 className={css.titlePrice}>{name.slice(0, 28)}</h3>
           <div className={css.contPriceFavorites}>
             <p className={css.titlePrice}>€{price}</p>
-            <svg className={css.favoritesSvg}>
-              <use href="/symbol-defs.svg#icon-Property-1Default"></use>
-            </svg>
+            <button onClick={handleFavoriteToggle} className={css.btnFavorite}>
+              <svg className={css.favoritesSvg}>
+                <use
+                  href={
+                    isFavorite
+                      ? '/symbol-defs.svg#icon-Vector-16'
+                      : '/symbol-defs.svg#icon-Property-1Default'
+                  }
+                ></use>
+              </svg>
+            </button>
           </div>
         </div>
         <div className={css.contRevLoc}>
@@ -85,7 +112,7 @@ export const Camper = ({ id }) => {
             {AC && <p>AC</p>}
           </div>
         </div>
-        <NavLink to={`/catalog/${id}`} state={locationPage}>
+        <NavLink to={`/catalog/${id}`}>
           <button type="button" className={css.camperBtn}>
             Show more
           </button>

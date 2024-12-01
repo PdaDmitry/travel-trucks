@@ -39,7 +39,15 @@
   line-height: 133%;
 }
 
+.btnFavorite {
+  padding: 0;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+}
+
 .favoritesSvg {
+  display: flex;
   width: 26px;
   height: 24px;
 }
@@ -128,6 +136,7 @@
   letter-spacing: -0.01em;
   color: #fff;
   background-color: #e44848;
+  cursor: pointer;
 }
 
 .camperBtn:hover {
