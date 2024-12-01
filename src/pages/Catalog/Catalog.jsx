@@ -19,8 +19,6 @@ export const Catalog = () => {
   const error = useSelector(selectIsError);
   const maxPage = useSelector(selectMaxPage);
   const campers = useSelector(selectCampers);
-  console.log('campers Ctalog', campers.length);
-
   const fetch = useSelector(selectFetched);
 
   //We use the ref to clear the fields after the request
@@ -65,7 +63,6 @@ export const Catalog = () => {
   useEffect(() => {
     if (!loading && fetch) {
       if (campers.length === 0) {
-        // console.warn('no results window');
         toast.error('No results were found for your request', {
           duration: 4000,
           position: 'bottom-center',
@@ -76,8 +73,6 @@ export const Catalog = () => {
         });
         setLoadMore(false);
       } else if (page === maxPage) {
-        // console.warn('end of results window');
-
         toast.error(`We're sorry, but you've reached the end of search results!`, {
           duration: 4000,
           position: 'bottom-center',
@@ -110,7 +105,6 @@ export const Catalog = () => {
       bathroom,
       form,
     };
-
     //We filter the parameters, leaving only those that are true
     for (let key in query) {
       if (!query[key]) delete query[key];
@@ -165,7 +159,6 @@ export const Catalog = () => {
                   </svg>
                 </div>
               </div>
-
               <div className={css.equipmentFilter}>
                 <p className={css.textFilter}>Filters</p>
                 <p className={css.titleEquipment}>Vehicle equipment</p>

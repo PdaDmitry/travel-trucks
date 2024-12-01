@@ -32,7 +32,6 @@ const catalogSlice = createSlice({
       //Loading all campers
       .addCase(fetchCampersThunc.pending, (state, action) => {
         state.hasBeenFetched = true;
-        // state.items = [];
         state.isLoading = true;
         state.isError = false;
         state.total = 0;
@@ -40,19 +39,10 @@ const catalogSlice = createSlice({
       .addCase(fetchCampersThunc.fulfilled, (state, action) => {
         state.isLoading = false;
         state.items = action.payload.items;
-        // if (!state.items.length) {
-        //   state.hasBeenFetched = false;
-        // } else {
-        //   state.hasBeenFetched = true;
-        // }
         state.total = state.items.length;
         state.maxPage = Math.ceil(state.total / state.perPage);
       })
-      .addCase(fetchCampersThunc.rejected, state => {
-        state.isLoading = false;
-        state.isError = true;
-        // state.hasBeenFetched = true;
-      })
+      .addCase(fetchCampersThunc.rejected, handleErrorState)
       //Loading a camper by ID
       .addCase(fetchCampersThuncById.pending, (state, action) => {
         state.isLoading = true;
@@ -74,7 +64,7 @@ const catalogSlice = createSlice({
 
         const camp = action.payload;
         const camperIndex = state.favorites.findIndex(item => item.id === camp.id);
-
+        //if the camper is missing, add it, if it exists, delete it;
         if (camperIndex === -1) {
           state.favorites.push(camp);
         } else {

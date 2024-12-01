@@ -32,7 +32,6 @@
 }
 
 .homeBtn {
-  /* font-family: var(--font-family); */
   font-weight: 500;
   font-size: 16px;
   line-height: 150%;
@@ -40,7 +39,6 @@
   color: white;
   cursor: pointer;
   border-radius: 200px;
-  /* padding: 16px 60px; */
   width: 173px;
   height: 56px;
   background-color: #e44848;

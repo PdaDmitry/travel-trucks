@@ -66,10 +66,8 @@
   border-radius: 10px;
   background-repeat: no-repeat;
   background-size: inherit;
-  /* сжимает фото */
   background-size: cover;
   background-position: center;
-  /* object-fit: cover; */
 }
 
 .textDescr {

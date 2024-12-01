@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import css from './CamperBookingForm.module.css';
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { CustomDatePicker } from '../CustomDatePicker/CustomDatePicker';
 
 export const CamperBookingForm = () => {
   const [modalData, setModalData] = useState(null);
@@ -71,12 +72,12 @@ export const CamperBookingForm = () => {
 
           <div className={css.contInput}>
             <Field
-              className={css.field}
-              type="date"
+              className={css.fieldDate}
               name="bookingDate"
-              // placeholder="Booking Date*"
+              component={CustomDatePicker}
+              placeholder="Booking date*"
+              style={{ width: '480px' }}
               required
-              min={new Date().toISOString().split('T')[0]} //Set the minimum date as today
             />
             <ErrorMessage className={css.errorText} name="bookingDate" component="span" />
           </div>
@@ -103,7 +104,7 @@ export const CamperBookingForm = () => {
             <h3 className={css.modalTitle}>Booking Details</h3>
             <p>Name: {modalData.name}</p>
             <p>Email: {modalData.email}</p>
-            <p>Booking Date: {modalData.bookingDate}</p>
+            <p>Booking Date: {new Date(modalData.bookingDate).toLocaleDateString()}</p>
             <p>Comment: {modalData.comment || 'No comment provided'}</p>
             <br />
             <p className={css.checkReservation}>

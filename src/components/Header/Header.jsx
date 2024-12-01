@@ -7,7 +7,6 @@ const buildLinkClass = ({ isActive }) => {
 };
 
 export const Header = () => {
-  // const locationPage = useLocation();
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
@@ -29,7 +28,6 @@ export const Header = () => {
             </NavLink>
           </li>
           <li className={css.contLi}>
-            {/* <NavLink to={locationPage.state} className={buildLinkClass}> */}
             <NavLink to="/catalog" className={buildLinkClass}>
               Catalog
             </NavLink>
