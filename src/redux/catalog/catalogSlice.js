@@ -15,6 +15,7 @@ const initialState = {
   perPage: 4,
   total: 0,
   maxPage: 1,
+  hasBeenFetched: false,
 };
 
 const catalogSlice = createSlice({
@@ -30,6 +31,8 @@ const catalogSlice = createSlice({
     builder
       //Loading all campers
       .addCase(fetchCampersThunc.pending, (state, action) => {
+        state.hasBeenFetched = true;
+        // state.items = [];
         state.isLoading = true;
         state.isError = false;
         state.total = 0;
@@ -37,10 +40,19 @@ const catalogSlice = createSlice({
       .addCase(fetchCampersThunc.fulfilled, (state, action) => {
         state.isLoading = false;
         state.items = action.payload.items;
+        // if (!state.items.length) {
+        //   state.hasBeenFetched = false;
+        // } else {
+        //   state.hasBeenFetched = true;
+        // }
         state.total = state.items.length;
         state.maxPage = Math.ceil(state.total / state.perPage);
       })
-      .addCase(fetchCampersThunc.rejected, handleErrorState)
+      .addCase(fetchCampersThunc.rejected, state => {
+        state.isLoading = false;
+        state.isError = true;
+        // state.hasBeenFetched = true;
+      })
       //Loading a camper by ID
       .addCase(fetchCampersThuncById.pending, (state, action) => {
         state.isLoading = true;

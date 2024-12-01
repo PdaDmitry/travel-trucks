@@ -5,7 +5,9 @@ axios.defaults.baseURL = 'https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/';
 
 export const fetchCampersThunc = createAsyncThunk('fetchCampers', async (query, thunkAPI) => {
   try {
-    // throw new Error('Simulated network error');  //error simulation
+    console.log('Api call');
+
+    // throw new Error('Simulated network erro/r'); //error simulation
     const response = await axios.get('/campers', { params: query });
 
     const items = response.data.items;
@@ -13,6 +15,9 @@ export const fetchCampersThunc = createAsyncThunk('fetchCampers', async (query, 
 
     return { items, total };
   } catch (error) {
+    if (error.response.status === 404) {
+      return { items: [], total: 0 };
+    }
     return thunkAPI.rejectWithValue(error.message);
   }
 });

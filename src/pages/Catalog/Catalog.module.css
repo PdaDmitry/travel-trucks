@@ -20,6 +20,7 @@
 }
 
 .contFilter {
+  width: 360px;
   margin-right: 64px;
 }
 
@@ -112,7 +113,7 @@
   display: none;
 }
 
-.checkboxInput:checked + .contSvgEquipment {
+.checkboxInput:checked+.contSvgEquipment {
   border: 1px solid #e44848;
   /* The container border turns red */
 }

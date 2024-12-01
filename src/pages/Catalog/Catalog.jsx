@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { CampersList } from '../../components/СampersList/CampersList';
 import {
   selectCampers,
+  selectFetched,
   selectIsError,
   selectIsLoading,
   selectMaxPage,
@@ -18,7 +19,9 @@ export const Catalog = () => {
   const error = useSelector(selectIsError);
   const maxPage = useSelector(selectMaxPage);
   const campers = useSelector(selectCampers);
-  // console.log(campers);
+  console.log('campers Ctalog', campers.length);
+
+  const fetch = useSelector(selectFetched);
 
   //We use the ref to clear the fields after the request
   const locationRef = useRef(null);
@@ -60,7 +63,19 @@ export const Catalog = () => {
   };
 
   useEffect(() => {
-    if (page === maxPage) {
+    console.log('page ', page);
+    console.log('maxPage ', maxPage);
+
+    if (campers.length === 0 && !loading && fetch) {
+      toast.error('No results were found for your request', {
+        duration: 4000,
+        position: 'bottom-center',
+        style: {
+          background: 'orange',
+          color: 'black',
+        },
+      });
+    } else if (page === maxPage) {
       toast.error(`We're sorry, but you've reached the end of search results!`, {
         duration: 4000,
         position: 'bottom-center',
@@ -73,7 +88,7 @@ export const Catalog = () => {
     } else {
       setLoadMore(true);
     }
-  }, [page, maxPage]);
+  }, [page, maxPage, campers, loading, fetch]);
 
   const handleLoadMore = () => {
     if (page < maxPage) {

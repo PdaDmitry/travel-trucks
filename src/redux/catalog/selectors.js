@@ -6,6 +6,7 @@ export const selectIsError = state => state.campers.isError;
 export const selectPerPage = state => state.campers.perPage;
 export const selectTotal = state => state.campers.total;
 export const selectMaxPage = state => state.campers.maxPage;
+export const selectFetched = state => state.campers.hasBeenFetched;
 
 export const selectCampersById = id =>
   createSelector(
