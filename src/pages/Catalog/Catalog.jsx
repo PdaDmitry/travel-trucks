@@ -63,30 +63,33 @@ export const Catalog = () => {
   };
 
   useEffect(() => {
-    console.log('page ', page);
-    console.log('maxPage ', maxPage);
+    if (!loading && fetch) {
+      if (campers.length === 0) {
+        // console.warn('no results window');
+        toast.error('No results were found for your request', {
+          duration: 4000,
+          position: 'bottom-center',
+          style: {
+            background: 'orange',
+            color: 'black',
+          },
+        });
+        setLoadMore(false);
+      } else if (page === maxPage) {
+        // console.warn('end of results window');
 
-    if (campers.length === 0 && !loading && fetch) {
-      toast.error('No results were found for your request', {
-        duration: 4000,
-        position: 'bottom-center',
-        style: {
-          background: 'orange',
-          color: 'black',
-        },
-      });
-    } else if (page === maxPage) {
-      toast.error(`We're sorry, but you've reached the end of search results!`, {
-        duration: 4000,
-        position: 'bottom-center',
-        style: {
-          background: 'orange',
-          color: 'black',
-        },
-      });
-      setLoadMore(false);
-    } else {
-      setLoadMore(true);
+        toast.error(`We're sorry, but you've reached the end of search results!`, {
+          duration: 4000,
+          position: 'bottom-center',
+          style: {
+            background: 'orange',
+            color: 'black',
+          },
+        });
+        setLoadMore(false);
+      } else if (page !== maxPage) {
+        setLoadMore(true);
+      }
     }
   }, [page, maxPage, campers, loading, fetch]);
 
