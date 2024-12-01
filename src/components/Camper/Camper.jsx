@@ -14,7 +14,7 @@ export const Camper = ({ id }) => {
   const camper = useSelector(selectCampersById(id));
 
   const favorites = useSelector(selectFavorites);
-  console.log(favorites);
+  // console.log('favorites ', favorites); // ability to view Favorites in the console!!!!!!
   const {
     name,
     price,

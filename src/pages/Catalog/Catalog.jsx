@@ -2,7 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import css from './Catalog.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { CampersList } from '../../components/СampersList/CampersList';
-import { selectIsError, selectIsLoading, selectMaxPage } from '../../redux/catalog/selectors';
+import {
+  selectCampers,
+  selectIsError,
+  selectIsLoading,
+  selectMaxPage,
+} from '../../redux/catalog/selectors';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import toast, { Toaster } from 'react-hot-toast';
@@ -12,6 +17,8 @@ export const Catalog = () => {
   const loading = useSelector(selectIsLoading);
   const error = useSelector(selectIsError);
   const maxPage = useSelector(selectMaxPage);
+  const campers = useSelector(selectCampers);
+  // console.log(campers);
 
   //We use the ref to clear the fields after the request
   const locationRef = useRef(null);
@@ -53,7 +60,7 @@ export const Catalog = () => {
   };
 
   useEffect(() => {
-    if (page >= maxPage) {
+    if (page === maxPage) {
       toast.error(`We're sorry, but you've reached the end of search results!`, {
         duration: 4000,
         position: 'bottom-center',
